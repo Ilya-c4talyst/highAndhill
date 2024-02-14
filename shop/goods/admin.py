@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Brand, ProductSizeLink, Size
+from .models import Product, Brand, ProductSizeLink, Size, Banner
 
 
 class SizeInline(admin.TabularInline):
@@ -21,9 +21,9 @@ class ProductAdmin(admin.ModelAdmin):
     def display_sizes(self, obj):
         sizes_list = ', '.join(
             [
-                size.size.name
+                str(size.size)
                 for size in obj.sizes.all()
-                if size.size.name
+                if str(size.size)
             ]
         )
         return sizes_list
@@ -49,3 +49,8 @@ class ProductSizeLinkRegister(admin.ModelAdmin):
     pass
     # list_display = ('__all__',)
     # list_editable = ('__all__',)
+
+
+@admin.register(Banner)
+class BannerAdmin(admin.ModelAdmin):
+    pass

@@ -49,7 +49,7 @@
         <div class="banners">
             {% for banner in banners %}
             <div class="banner">
-                <img src="{banner.img.url}" alt="">
+                <img src="{{banner.image.url}}" alt="">
             </div>
             {% endfor %}
         </div>
@@ -75,12 +75,12 @@
             {% for good in goods %}
             <div class="content-block">
                 <div class="photo">
-                    <img src="{{good.image}}" alt="">
+                    <img src="{{good.images.url}}" alt="">
                 </div>
                 <div class="info">
                     <h3>{{good.name}}</h3>
-                    <p>{{good.description}}</p>
-                    <p>ОТ {{good.price}}₸</p>
+                    {% comment %} <p>{{good.description}}</p> {% endcomment %}
+                    <p>ОТ {{good.price}} ₸</p>
                 </div>
             </div>
             {% endfor %}

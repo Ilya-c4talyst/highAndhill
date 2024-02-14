@@ -5,6 +5,15 @@ class Banner(models.Model):
     name = models.CharField(max_length=150)
     image = models.ImageField(upload_to='banners/')
 
+    class Meta:
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'
+
+    def __str__(self) -> str:
+        return self.name
+    
+
+
 class Brand(models.Model):
     name = models.CharField(max_length = 150, verbose_name = 'Название бренда')
     slug = models.SlugField(max_length=200, unique=True)
@@ -25,7 +34,7 @@ class Size(models.Model):
         verbose_name_plural = 'Размеры'
 
     def __str__(self) -> str:
-        return self.size
+        return f'{self.size}'
 
 
 class Product(models.Model):
