@@ -85,11 +85,38 @@
             </div>
             {% endfor %}
         </div>
-        <div class="not-found">
-            <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
-            <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
-            <!-- <img src="static/images/header/info.png" alt=""> -->
+        <div class="pagination">
+            <div class="step-links">
+                {% if goods.has_previous %}
+                    <div class="arrow">
+                        <a href="?page={{ goods.previous_page_number }}"><img src="{% static 'images/footer/left.svg' %}" alt=""></a>
+                    </div>
+                    {% comment %} <a href="?page=1">&laquo;</a> {% endcomment %}
+                    <div class="previous_page">
+                        <a href="?page={{ goods.previous_page_number }}">{{ goods.previous_page_number }}</a>
+                    </div>
+                {% endif %}
+        
+                <div class="current">
+                    <a>{{ goods.number }}</a>
+                </div>
+        
+                {% if goods.has_next %}
+                    <div class="next_page">
+                        <a href="?page={{ goods.next_page_number }}">{{ goods.next_page_number }}</a>
+                    </div>
+                    <div class="arrow">
+                        <a href="?page={{ goods.next_page_number }}"><img src="{% static 'images/footer/right.svg' %}" alt=""></a>
+                    </div>
+                    {% comment %} <a href="?page={{ goods.paginator.num_pages }}">&raquo;</a> {% endcomment %}
+                {% endif %}
+                </div>
         </div>
+        
+        
+
+
+
     </div>
         <div class ="footer-div">
             <footer>
