@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="banners">
+    {% for banner in banners %}
+    <div class="banner">
+        <img src="{{banner.image.url}}" alt="">
+    </div>
+    {% endfor %}
+</div>
+<div class="list_goods">
+    <div class="filter-area">
+        <div class="all">
+            <form method="GET" action="{% url 'goods:shoes' %}">
+                <input type="text" name="search_query" placeholder="Поиск...">
+                <select name="brand">
+                    <option value="">All Brands</option>
+                    {% for brand in brands %}
+                        <option value="{{ brand.id }}">{{ brand.name }}</option>
+                    {% endfor %}
+                </select>
+                <select name="sizes">
+                    <option value="">All Sizes</option>
+                    {% for size in sizes %}
+                        <option value="{{ size.id }}">{{ size.size }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Применить</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="blocks">
+    {% for good in goods %}
+    <div class="content-block">
+        <a href="{% url 'goods:shoe' good.id %}">
+        <div class="photo">
+            <img src="{{good.images.url}}" alt="">
+        </div>
+        <div class="info">
+            <h3>{{good.name}}</h3>
+            {% comment %} <p>{{good.description}}</p> {% endcomment %}
+            <p>ОТ {{good.price}} ₸</p>
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    <div class="step-links">
+        {% if goods.has_previous %}
+            <div class="arrow">
+                <a href="?page={{ goods.previous_page_number }}"><img src="{% static 'images/footer/left.svg' %}" alt=""></a>
+            </div>
+            <div class="previous_page">
+                <a href="?page={{ goods.previous_page_number }}">{{ goods.previous_page_number }}</a>
+            </div>
+        {% endif %}
+
+        <div class="current">
+            <a>{{ goods.number }}</a>
+        </div>
+
+        {% if goods.has_next %}
+            <div class="next_page">
+                <a href="?page={{ goods.next_page_number }}">{{ goods.next_page_number }}</a>
+            </div>
+            <div class="arrow">
+                <a href="?page={{ goods.next_page_number }}"><img src="{% static 'images/footer/right.svg' %}" alt=""></a>
+            </div>
+            {% comment %} <a href="?page={{ goods.paginator.num_pages }}">&raquo;</a> {% endcomment %}
+        {% endif %}
+        </div>
+</div> 
+{% endblock main %}

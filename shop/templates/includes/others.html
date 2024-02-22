@@ -1,0 +1,16 @@
+<div class="inspiration">
+    <a href="#"><h2>ДРУГИЕ МОДЕЛИ</h2></a>
+    <div class="blocks">
+        {% for good in look_at %}
+        <div class="content-block">
+            <div class="photo">
+                <img src="{{good.images.url}}" alt="">
+            </div>
+            <div class="info">
+                <h3>{{good.name}}</h3>
+                <p>ОТ {{good.price}}₸</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

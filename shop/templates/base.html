@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>Main page</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container-2">
+        <div class="upper">
+            <header>
+                <div class="header-block">
+                    <div class="logo">
+                        <a href="{% url "goods:index" %}">
+                        <img src="{% static 'images/header/logo.svg' %}" alt="">
+                    </a>
+                    </div>
+                    <nav class="nav-1">
+                        <div class="nav-item">
+                            <p>SALE</p>
+                        </div>
+                        <div class="nav-item">
+                            <a href="{% url "goods:shoes" %}"><p>ОБУВЬ</p></a>
+                        </div>
+                        <div class="nav-item">
+                            <p>ОДЕЖДА</p>
+                        </div>
+                        <div class="nav-item">
+                            <p>АКСЕССУАРЫ</p>
+                        </div>
+                        <div class="nav-item">
+                            <p>ИНФОРМАЦИЯ</p>
+                        </div>
+                    </nav>
+                    <div class="icons">
+                        <div class="icon"><img src="{% static 'images/header/Vector-4.svg' %}" alt=""></div>
+                        <div class="icon"><img src="{% static 'images/header/Vector-3.svg' %}" alt=""></div>
+                        <div class="icon"><img src="{% static 'images/header/Vector-2.svg' %}" alt=""></div>
+                        <div class="icon"><img src="{% static 'images/header/Vector.svg' %}" alt=""></div>
+                    </div>
+                </div>
+            </header>
+            {% block main %}
+            <div class="banner-ind">
+                <div class="banner-f">
+                    <img src="{{banner.image}}" alt="">
+                </div>
+                <div class="buy-banner">
+                    <a href="#"><h2>КУПИТЬ</h2></a>
+                </div>
+            </div>
+            <div class="popular">
+                <div class="text-area">
+                    <div class="most">
+                        <a href="#"><h2>MOST POPULAR</h2></a>
+                    </div>
+                    <div class="text-area">
+                        <a href="#"><h2>SEE ALL</h2></a>
+                    </div>
+                </div>
+                <div class="blocks">
+                    {% for good in goods %}
+                    <div class="content-block">
+                        <div class="photo">
+                            <img src="{{good.image}}" alt="">
+                        </div>
+                        <div class="info">
+                            <h3>{{good.name}}</h3>
+                            <p>{{good.description}}</p>
+                            <p>ОТ {{good.price}}₸</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                    
+            <div class="new-models">
+                <div class="text-area">
+                    <div class="most">
+                        <a href="#"><h2>NEW MODELS</h2></a>
+                    </div>
+                    <div class="see-all">
+                        <a href="#"><h2>SEE ALL</h2></a>
+                    </div>
+                </div>
+                <div class="blocks">
+                    {% for good in goods %}
+                    <div class="content-block">
+                        <div class="photo">
+                            <img src="{{good.image}}" alt="">
+                        </div>
+                        <div class="info">
+                            <h3>{{good.name}}</h3>
+                            <p>{{good.description}}</p>
+                            <p>ОТ {{good.price}}₸</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="not-found">
+                <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
+                <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
+                <!-- <img src="static/images/header/info.png" alt=""> -->
+            </div>
+            {% endblock main %}
+        </div>
+        {% block content %}
+        {% endblock content %}
+    </div>
+    </div>
+    <div class ="footer-div">
+        <footer>
+                <div class="nav-footer">
+                    <div class="name">
+                        <h5>РАЗДЕЛЫ</h5>
+                    </div>
+                    <div class="foot-content">
+                        <p>SALE</p>
+                        <p>ОБУВЬ</p>
+                        <p>АКСЕССУАРЫ</p>
+                        <p>ОДЕЖДА</p>
+                        <p>БРЕНДЫ</p>
+                    </div>
+                </div>
+                <div class="info-footer">
+                    <div class="name">
+                        <h5>ИНФОРМАЦИЯ</h5>
+                    </div>
+                    <div class="foot-content">
+                        <p>КОНТАКТЫ</p>
+                        <p>ДОСТАВКА</p>
+                        <p>ОПЛАТА</p>
+                        <p>ВОЗВРАТ</p>
+                        <p>FAQ</p>
+                    </div>
+                </div>
+                <div class="contacts-footer">
+                    <div class="name">
+                        <h5>КОНТАКТЫ</h5>
+                    </div>
+                    <div class="foot-content">
+                        <p>8 (929) 665 44 19</p>
+                        <p>highend.hill@mail.ru</p>
+                        <p>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</p>
+                        <p>Значок 1</p>
+                        <p>Значок 2</p>
+                    </div>
+                </div>
+        </footer>
+    </div>
+</body>
+</html>

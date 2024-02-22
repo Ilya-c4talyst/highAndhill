@@ -1,0 +1,13 @@
+{% load static %}
+<div class="reverse">
+    <a href="{% url "goods:index" %}">
+        <div class="reverse-btn">
+            <div class="txt-reverse">
+                <p>ПРОДОЛЖИТЬ ПОКУПКИ</p>
+            </div>
+            <div class="svg-reverse">
+                <img src="{% static 'images/catalog/arrow.svg' %}" alt="">
+            </div>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="product-box">
+    <div class="images-block">
+        <div class="img-shoe">
+            <img src="{{product.images.url}}" alt="">
+        </div>
+        <div class="other-views">
+            {% for img in product.show_images.all %}
+            <div class="view">
+                <img src="{{img.img.url}}" alt="">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="info-box">
+            <div class="bttns">
+                <button onclick="showCategory('category1')">Описание</button>
+                <button onclick="showCategory('category2')">Доставка</button>
+                <button onclick="showCategory('category3')">Способы оплаты</button>
+                <button onclick="showCategory('category4')">FAQ</button>
+            </div>
+            <div class="content-info" id="category-content">
+                {{ product.description }}
+            </div>
+            <script>
+                function showCategory(category) {
+                    var cont = `{{ product.description }}`;
+                    const contentInfo = document.getElementById('category-content');
+
+                    if (category === 'category1') {
+                        contentInfo.innerText = cont;
+                    } else if (category === 'category2') {
+                        contentInfo.innerText = 'Доставка';
+                    } else if (category === 'category3') {
+                        contentInfo.innerText = 'Способы оплаты';
+                    } else if (category === 'category4') {
+                        contentInfo.innerText = 'FAQ';
+                    }
+                }                
+            </script>
+        </div>
+
+    </div>
+    <div class="info-price-box">
+        <div class="name-box">
+            <h1>{{product.name}}</h1>
+        </div>
+        <div class="price-box">
+            <h2>ОТ {{product.price}}₸</h2>
+        </div>
+        <div class="sizes-box">
+            {% for size in product.sizes.all %}
+            <a href="">
+                <div class="size">
+                    <button>
+                        <h3>{{size}} EU</h3>
+                    </button>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        <div class="add_to_buy">
+            <button>
+                <h2>ДОБАВИТЬ В КОРЗИНУ</h2>
+            </button>
+        </div>
+    </div>
+    {% endblock main %}
+</div>
+{% block content %}
+    {% include "includes/others.html" %}
+    {% include "includes/reverse.html" %}
+{% endblock content %}

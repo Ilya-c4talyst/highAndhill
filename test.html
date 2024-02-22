@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Block Content</title>
+    <style>
+        .content-block {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button onclick="showCategory('category1')">Категория 1</button>
+        <button onclick="showCategory('category2')">Категория 2</button>
+        <button onclick="showCategory('category3')">Категория 3</button>
+    </div>
+    <div class="content-block" id="category-content">
+        Выберите категорию для просмотра информации
+    </div>
+
+    <script>
+        function showCategory(category) {
+            const contentBlock = document.getElementById('category-content');
+            if (category === 'category1') {
+                contentBlock.innerText = 'Информация для категории 1';
+            } else if (category === 'category2') {
+                contentBlock.innerText = 'Информация для категории 2';
+            } else if (category === 'category3') {
+                contentBlock.innerText = 'Информация для категории 3';
+            }
+        }
+    </script>
+</body>
+</html>
