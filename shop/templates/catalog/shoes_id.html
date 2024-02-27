@@ -5,15 +5,16 @@
 <div class="product-box">
     <div class="images-block">
         <div class="img-shoe">
-            <img src="{{product.images.url}}" alt="">
+            <img id="main-image" src="{{ product.images.url }}" alt="">
         </div>
         <div class="other-views">
             {% for img in product.show_images.all %}
-            <div class="view">
-                <img src="{{img.img.url}}" alt="">
+            <div class="view" data-image-url="{{ img.img.url }}">
+                <img src="{{ img.img.url }}" alt="">
             </div>
             {% endfor %}
         </div>
+        
         <div class="info-box">
             <div class="bttns">
                 <button onclick="showCategory('category1')">Описание</button>
@@ -25,6 +26,16 @@
                 {{ product.description }}
             </div>
             <script>
+                const mainImage = document.getElementById('main-image');
+                const imageViews = document.querySelectorAll('.view');
+
+                imageViews.forEach((imageView) => {
+                    imageView.addEventListener('click', () => {
+                        const imageUrl = imageView.getAttribute('data-image-url');
+                        mainImage.src = imageUrl;
+                    });
+                });
+
                 function showCategory(category) {
                     var cont = `{{ product.description }}`;
                     const contentInfo = document.getElementById('category-content');
@@ -38,7 +49,7 @@
                     } else if (category === 'category4') {
                         contentInfo.innerText = 'FAQ';
                     }
-                }                
+                }
             </script>
         </div>
 
@@ -51,22 +62,58 @@
             <h2>ОТ {{product.price}}₸</h2>
         </div>
         <div class="sizes-box">
-            {% for size in product.sizes.all %}
-            <a href="">
-                <div class="size">
-                    <button>
-                        <h3>{{size}} EU</h3>
-                    </button>
-                </div>
-            </a>
-            {% endfor %}
+            <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="size" id="selected-size">
+                {% for size in product.sizes.all %}
+                    <div class="size">
+                        <button type="button" class="size-btn" data-size="{{ size }}">
+                            <h3>{{ size }} EU</h3>
+                        </button>
+                    </div>
+                {% endfor %}
+
         </div>
         <div class="add_to_buy">
-            <button>
-                <h2>ДОБАВИТЬ В КОРЗИНУ</h2>
-            </button>
+           
+                {% csrf_token %}
+                <button type="submit">
+                    <h2>ДОБАВИТЬ В КОРЗИНУ</h2>
+                </button>
+            </form>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sizeButtons = document.querySelectorAll('.size-btn');
+            const addToCartForm = document.getElementById('add-to-cart-form');
+            const selectedSizeInput = document.getElementById('selected-size');
+        
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    sizeButtons.forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+        
+                    button.classList.add('selected');
+                    const selectedSize = button.getAttribute('data-size');
+        
+                    selectedSizeInput.setAttribute('value', selectedSize);  // Устанавливаем выбранный размер в скрытое поле
+                });
+            });
+        
+            addToCartForm.addEventListener('submit', function(event) {
+                const selectedSize = selectedSizeInput.value;
+        
+                if (!selectedSize || selectedSize === 'None') {
+                    event.preventDefault();
+                    alert('Пожалуйста, выберите размер перед добавлением в корзину!');
+                } else {
+                    // Здесь добавьте логику отправки выбранного товара в корзину
+                }
+            });
+        });
+    </script>
     {% endblock main %}
 </div>
 {% block content %}

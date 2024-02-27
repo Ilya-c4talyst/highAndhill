@@ -40,10 +40,10 @@
                         </div>
                     </nav>
                     <div class="icons">
-                        <div class="icon"><img src="{% static 'images/header/Vector-4.svg' %}" alt=""></div>
-                        <div class="icon"><img src="{% static 'images/header/Vector-3.svg' %}" alt=""></div>
-                        <div class="icon"><img src="{% static 'images/header/Vector-2.svg' %}" alt=""></div>
-                        <div class="icon"><img src="{% static 'images/header/Vector.svg' %}" alt=""></div>
+                        {% comment %} <div class="icon"><img src="{% static 'images/header/Vector-4.svg' %}" alt=""></div> {% endcomment %}
+                        {% comment %} <div class="icon"><a href='{% url "goods:view_cart" %}'><img src="{% static 'images/header/Vector-3.svg' %}" alt=""></a></div> {% endcomment %}
+                        {% comment %} <div class="icon"><img src="{% static 'images/header/Vector-2.svg' %}" alt=""></div> {% endcomment %}
+                        <div class="icon"><a href='{% url "goods:view_cart" %}'><span>Корзина</span><img src="{% static 'images/header/Vector.svg' %}" alt=""></a></div>
                     </div>
                 </div>
             </header>
