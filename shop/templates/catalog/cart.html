@@ -1,25 +1,148 @@
 {% extends "base.html" %}
-
+{% load static %}
 
 {% block main %}
-<ul>
-    {% for item in cart_items %}
-        <li>
-            <strong>{{ item.product.name }}</strong> ({{ item.size }}) - Цена: {{ item.product.price }} руб. x {{ item.quantity }} шт. = {{ item.total_price }} руб.
-            <form method="post" action="{% url 'goods:remove_item_from_cart' %}">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                <button type="submit">Удалить</button>
-            </form>
-            <form method="post" action="{% url 'goods:update_cart' %}">
-                {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{ item.product.id }}">
-                <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
-                <button type="submit">Обновить</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
-<p>Общая стоимость корзины: {{ total_price }} руб.</p>
+
+<div class="cart-box">
+    <div class="positions-cart">
+        <div class="name">
+            <h2>КОРЗИНА</h2>
+        </div>
+        <div class="positions">
+            <ul>
+                {% for item in cart_items %}
+                <div class="position">
+                    <li>
+                        <div class="position-img">
+                            <img src="{{item.product.images.url}}">
+                        </div>
+
+                        <div class="position-line">
+                            <img src="{% static 'images/catalog/yLine.png' %}">
+                        </div>
+
+                        <div class="position-info">
+                            <div class="brand">
+                                <h1>{{item.product.brand}}</h1>
+                            </div>
+                            <div class="name_size">
+                                <h2>{{item.product.name}} ({{item.size}})</h2>
+                            </div>
+                            <div class="form-block">
+                                <form method="post" action="{% url 'goods:update_cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1">
+                                    <button type="submit">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVR4nO3USUoDYRAF4E/BlRo33sBh6wDuRFTwVmKCXiKaIwhKtkoWuYORXMEhgsaFu5aGCrQi3b9DwEUeNHTDq/dq6Com+AMcoIU+XvGCHs6w9xvhVXSRVTzXWCnENVLEd/AUAnc4xDpmUcMGjnEfnAG2QjxLyXwkfo75Eu4i2sF9K1RVim5BfCqh2pmYSbFtpQMdtaUs8yJGbUkyaAUh7/lPxbOygH4Q1owJwzCY8w9Ri+Sex2WwGQa3ZaSvBtZINKgHv/kdg0ai+AIeImY/1aAXS1SFaVxGTKeKnH1a+3acg7LML4L7iKUUg3ocrkF856WfxBAXYsPz96NCW3Lx7YRqP/R8GVcJ57qTknkZdnGKm/jHhzGfZtVAJ5CCdywscWCgJHMnAAAAAElFTkSuQmCC">
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="delete">
+                            <form method="post" action="{% url 'goods:remove_item_from_cart' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                <button type="submit">
+                                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAi0lEQVR4nO3VMQ6AIAyF4f9ib9E7qVdWD6ExOhgTpLTg5FuY6BdCC/AnkAHoIgU49x91khEwA70TELBY9nshWQEvpFKgFJIXsEKKAjlItYAUpNrAvf9XYLrW6DwlMwLbtTZJ1/okzztQ8GXIAtSGcl2kKGRtU3mh0jlQKeQdNFmh6CTLAn3yM/7hLTtHBjH8yNmtagAAAABJRU5ErkJggg==">
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% if cart_items %}
+    <div class="results">
+        <div class="name">
+            <h2>СВЕДЕНИЯ</h2>
+        </div>
+        <div class="results-content">
+            <div class="price-first">
+                <div class="text-area">
+                    <p>Промежуточный итог</p>
+                </div>
+                <div class="money">
+                    <p>{{ total_price }}₸</p>
+                </div>
+            </div>
+
+            <div class="price-first">
+                <div class="text-area">
+                    <p>Предполагаемая стоимость доставки</p>
+                </div>
+                <div class="money">
+                    <p>8000₸</p>
+                </div>
+            </div>
+
+            <div class="results-line">
+                <img src="{% static 'images/catalog/xLine.png' %}">
+            </div>
+
+            <div class="price-first">
+                <div class="text-area">
+                    <p>Всего</p>
+                </div>
+                <div class="money">
+                    <p>{{ res_price }}₸</p>
+                </div>
+            </div>
+
+            <div class="results-line">
+                <img src="{% static 'images/catalog/xLine.png' %}">
+            </div>
+
+            <div class="code">
+                <div class="btn-code">
+                    <button onclick="showCode()" id="getOrderCode">Получить код заказа</button>
+                </div>
+                
+                <div class="code-info" id="code-content"></div>
+                
+            </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                
+                function showCode() {
+                    // Ваш текущий код
+                    console.log(1)
+                    var cont = '{{ code }}';
+                    const codeInfo = document.getElementById('code-content');
+                    codeInfo.innerText = cont;
+
+                    var code = '{{code}}'
+                    var cart = {{cart}}
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "goods:order" %}',  // Укажите URL вашего view
+                        data: {
+                            csrfmiddlewaretoken: '{{ csrf_token }}',  // Защита CSRF
+                            code: code,  // Передача кода
+                            cart: cart   // Передача корзины
+                            // Дополнительные данные, если нужно
+                        },
+                        success: function(data) {
+                            // Обработка успешного выполнения запроса
+                            console.log(data);
+                            // Можно добавить дополнительную логику после успешного выполнения
+                        },
+                        error: function(xhr, errmsg, err) {
+                            // Обработка ошибок
+                            console.log(xhr.status + ": " + xhr.responseText);
+                            // Можно добавить обработку ошибок
+                        }
+                        });
+                }
+            </script>
+            
+        </div>
+    </div>
+    {% endif %}
+</div>
 
 {% endblock %}

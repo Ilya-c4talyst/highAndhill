@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>Main page</title>
@@ -19,7 +19,7 @@
                 <div class="header-block">
                     <div class="logo">
                         <a href="{% url "goods:index" %}">
-                        <img src="{% static 'images/header/logo.svg' %}" alt="">
+                        <img src="{% static 'images/header/test-svg-3.svg' %}" alt="">
                     </a>
                     </div>
                     <nav class="nav-1">
@@ -36,7 +36,7 @@
                             <p>АКСЕССУАРЫ</p>
                         </div>
                         <div class="nav-item">
-                            <p>ИНФОРМАЦИЯ</p>
+                            <a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>
                         </div>
                     </nav>
                     <div class="icons">

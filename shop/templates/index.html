@@ -2,12 +2,11 @@
 {% load static %}
 {% block main %}
     <div class="banner-ind">
-        <div class="banner-f">
-            <img src="{% static 'images/header/banner.png' %}" alt="">
-        </div>
-        <div class="buy-banner">
-            <a href="#"><h2>КУПИТЬ</h2></a>
-        </div>
+        <a href ="{{banner.url}}">
+            <div class="banner-f">
+                <img src="{{banner.image.url}}" alt="">
+            </div>
+        </a>
     </div>
     <div class="popular">
         <div class="text-area">

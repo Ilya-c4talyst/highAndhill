@@ -5,7 +5,9 @@
 <div class="banners">
     {% for banner in banners %}
     <div class="banner">
-        <img src="{{banner.image.url}}" alt="">
+        <a href="{{banner.url}}">
+            <img src="{{banner.image.url}}" alt="">
+        </a>
     </div>
     {% endfor %}
 </div>
@@ -31,6 +33,7 @@
         </div>
     </div>
 </div>
+{% if flag %}
 <div class="blocks">
     {% for good in goods %}
     <div class="content-block">
@@ -39,7 +42,8 @@
             <img src="{{good.images.url}}" alt="">
         </div>
         <div class="info">
-            <h3>{{good.name}}</h3>
+            <h3>{{good.brand}}</h3>
+            <p>{{good.name}}</p>
             {% comment %} <p>{{good.description}}</p> {% endcomment %}
             <p>ОТ {{good.price}} ₸</p>
         </div>
@@ -73,4 +77,12 @@
         {% endif %}
         </div>
 </div> 
+{% else %}
+<div class="not-found">
+    <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
+    <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
+    <!-- <img src="static/images/header/info.png" alt=""> -->
+</div>
+{% endif %}
+
 {% endblock main %}

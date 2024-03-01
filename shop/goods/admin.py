@@ -4,7 +4,7 @@ from .models import (
     Product, Brand, ProductSizeLink,
     Size, Banner, Type, ClothSize, Cloth,
     ClothSizeLink, ImageClothLink,
-    ImageProductLink, Image
+    ImageProductLink, Image, Order
 )
 
 
@@ -147,3 +147,7 @@ class ImageAdmin(admin.ModelAdmin):
 # @admin.register(ImageProductLink)
 # class ImageShoeAdmin(admin.ModelAdmin):
 #     pass
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    pass

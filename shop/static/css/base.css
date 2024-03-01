@@ -4,7 +4,7 @@ body, h1, h2, h3, h4, h5, p, img, nav, li, ol, a footer{
 }
 
 body {
-    max-width: 2800px;
+    max-width: 2500px;
     height: 100vh;
     width: 100%;
     font-family: "Oswald", sans-serif;
@@ -367,6 +367,8 @@ button:hover {
 }
 
 /* Страница конкретного товара */
+
+
 .product-box {
     margin-top: 30px;
     display: flex;
@@ -509,22 +511,6 @@ button:hover {
     padding-left: 2%;
 }
 
-.add_to_buy {
-    margin-top: 35px;
-}
-
-.add_to_buy button {
-    max-width: 450px;
-    width: 100%;
-}
-
-.add_to_buy button h2{
-    padding: 16px 25px;
-    color: white;
-    font-weight: 400;
-}
-
-
 .size-btn {
     border: #000 solid 2px;
     border-radius: 15px;
@@ -539,4 +525,168 @@ button:hover {
 input form {
     margin: 0;
     padding: 0;
+}
+
+.add-to-cart-btn {
+    margin-top: 55px;
+    padding: 16px 25px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    max-width: 450px;
+    width: 100%;
+}
+
+.btn-text {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.added-text {
+    display: none;
+    color: green;
+    margin-left: 10px;
+}
+
+.added {
+    background-color: lightgreen !important; /* Цвет фона для подтверждения добавления */
+}
+
+/* Корзина */
+.cart-box{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.name h2{
+    font-size: 55px;
+    font-weight: 400;
+}
+
+ul li {
+    list-style: none;
+
+}
+
+.position li {
+    display: flex;
+    margin-top: 40px;
+}
+
+.position img {
+    max-height: 288px;
+    height: 100%;
+}
+
+.position-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 30px;
+}
+
+.position-info .name_size {
+    padding: 15px 0;
+}
+
+.brand h1 {
+    font-weight: 600;
+    font-size: 34px;
+}
+
+.name_size h2 {
+    font-weight: 300;
+    font-size: 34px;
+}
+
+.form-block form, .delete form{
+    background-color: white;
+}
+
+.delete form button {
+    background-color: white;
+    padding: 0;
+    margin-left: 50px;
+}
+
+.form-block form button {
+    background-color: white;
+}
+
+.form-block form input {
+    max-width: 40px;
+}
+
+.price-first {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.price-first:first-child{
+    margin-top: 50px;
+}
+
+.price-first .text-area p, .price-first .money p{
+    font-size: 35px;
+}
+
+.price-first .text-area{
+    max-width: 70%;
+}
+
+.code {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-top: 30px;
+}
+
+.btn-code button{
+    font-size: 40px;
+    font-weight: 300;
+    color: #000;
+    background-color: white;
+}
+
+.code-info {
+    margin-top: 20px;
+    font-size: 45px;
+    font-weight: 500;
+    color: #000;
+    background-color: white;
+}
+
+/* FAQ */
+.question {
+    display: flex;
+    justify-content: space-between;
+}
+
+.question .btn {
+    max-width: 80%;
+}
+
+.question .btn button {
+    background-color: white;
+    color: #000;
+    padding: 0;
+    margin: 30px 0;
+    font-size: 40px;
+    font-weight: 400px;
+    text-align: left;
+}
+
+.answer {
+    font-size: 28px;
+    font-weight: 300;
+}
+
+.question-block:last-of-type {
+    margin-bottom: 150px;
 }

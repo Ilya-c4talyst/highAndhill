@@ -56,7 +56,7 @@
     </div>
     <div class="info-price-box">
         <div class="name-box">
-            <h1>{{product.name}}</h1>
+            <h1>{{product.brand}} {{product.name}}</h1>
         </div>
         <div class="price-box">
             <h2>ОТ {{product.price}}₸</h2>
@@ -75,10 +75,11 @@
 
         </div>
         <div class="add_to_buy">
-           
+            <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
                 {% csrf_token %}
-                <button type="submit">
-                    <h2>ДОБАВИТЬ В КОРЗИНУ</h2>
+                <button type="submit" class="add-to-cart-btn">
+                    <span class="btn-text">Добавить в корзину</span>
+                    <span class="added-text">Добавлено</span>
                 </button>
             </form>
         </div>
@@ -88,6 +89,8 @@
             const sizeButtons = document.querySelectorAll('.size-btn');
             const addToCartForm = document.getElementById('add-to-cart-form');
             const selectedSizeInput = document.getElementById('selected-size');
+            const addBtn = document.querySelector('.add-to-cart-btn');
+            const addedText = document.querySelector('.added-text');
         
             sizeButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -103,13 +106,23 @@
             });
         
             addToCartForm.addEventListener('submit', function(event) {
+                const selectedSizeInput = document.getElementById('selected-size');
                 const selectedSize = selectedSizeInput.value;
         
                 if (!selectedSize || selectedSize === 'None') {
                     event.preventDefault();
                     alert('Пожалуйста, выберите размер перед добавлением в корзину!');
+        
                 } else {
-                    // Здесь добавьте логику отправки выбранного товара в корзину
+                    event.preventDefault();
+        
+                    addBtn.classList.add('added');
+                    addBtn.disabled = true;
+                    addedText.style.display = 'inline';
+        
+                    setTimeout(function() {
+                        addToCartForm.submit();
+                    }, 1000);
                 }
             });
         });

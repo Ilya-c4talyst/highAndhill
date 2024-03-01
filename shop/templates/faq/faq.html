@@ -1,0 +1,278 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<div class="faq-blocks">
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('1')">Вы продаете оригинальные товары?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img1'>
+            </div>
+        </div>
+        <div class="answer" id='faq-1'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('2')">Как формируется цена на площадке?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img2'>
+            </div>
+        </div>
+        <div class="answer" id='faq-2'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('3')">Как долго занимает доставка?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img3'>
+            </div>
+        </div>
+        <div class="answer" id='faq-3'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('4')">Есть ли у вас скидки?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img4'>
+            </div>
+        </div>
+        <div class="answer" id='faq-4'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('5')">Возможно ли получить консультацию от специалистов вашего магазина относительно выбора кроссовок?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img5'>
+            </div>
+        </div>
+        <div class="answer" id='faq-5'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('6')">Как точно определить свой размер?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img6'>
+            </div>
+        </div>
+        <div class="answer" id='faq-6'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('7')">Доставляете ли вы в другие города Казахстана?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img7'>
+            </div>
+        </div>
+        <div class="answer" id='faq-7'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('8')">Как рассчитывается доставка в другие города?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img8'>
+            </div>
+        </div>
+        <div class="answer" id='faq-8'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('9')">Есть ли у вас товары в наличии?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img9'>
+            </div>
+        </div>
+        <div class="answer" id='faq-9'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('10')">А в цену уже включена доставка?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img10'>
+            </div>
+        </div>
+        <div class="answer" id='faq-10'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    
+
+<script>
+    function showFaq(question) {
+        const firstTxt = 'На площадке Poizon все товары являются оригинальными и проходят тщательную проверку на подлинность. Каждому товару прилагается сертификат, подтверждающий его оригинальность. Мы уверены в качестве продукции, которую предоставляем нашим клиентам, и делаем все возможное, чтобы гарантировать им только подлинные товары.'
+        const secondTxt = 'Формирование цен на кроссовки определяется комплексом факторов, причем спрос является одним из ключевых элементов. При повышенном спросе на конкретную модель стоимость товара может быть скорректирована вверх в связи с увеличенным интересом со стороны потребителей. В обратной ситуации, когда спрос ограничен, возможно снижение цен с целью стимулирования спроса и привлечения новых покупателей. Таким образом, баланс между спросом и предложением оказывает существенное влияние на формирование окончательной стоимости товара.'
+        const thirdTxt = 'Обычно доставка занимает 10-12 дней. Мы стараемся доставить ваш заказ как можно скорее, однако точное время может изменяться в зависимости от вашего местоположения и загруженности службы доставки. При оформлении заказа вы можете уточнить ожидаемую дату доставки. Мы делаем все возможное, чтобы обеспечить быструю и надежную доставку, чтобы вы получили свой заказ вовремя.'
+        const fourthTxt = 'Получите скидку в размере 15% на ваш первый заказ. Это уникальное предложение позволит вам сэкономить при покупке у нас. Просто укажите менеджеру промокод HEH15 при оформлении заказа. Обратите внимание, что данная скидка не распространяется на товары, участвующие в акционных предложениях.'
+        const fiveTxt = 'Конечно, наши специалисты всегда готовы помочь вам с выбором кроссовок. Наш персонал обладает экспертным знанием о кроссовках и с удовольствием поможет вам найти идеальную пару для ваших потребностей. Свяжитесь с нашими консультантами через чат в Direct/WhatsApp/Telegram. <br> Не стесняйтесь задавать любые вопросы и делиться своими предпочтениями – мы рады помочь вам выбрать кроссовки, которые подходят именно вам.'
+        const sixTxt = 'Для точного подбора вашего размера, рекомендуем измерить длину вашей стопы или стельки, согласно инструкции на картинке, и сообщить нам результат в миллиметрах. Мы с удовольствием поможем определить идеальный размер обуви для вас. Если у вас возникли вопросы, не стесняйтесь обращаться к нашему менеджеру - он всегда на связи и готов помочь.'
+        const sevenTxt = 'Конечно! Мы готовы доставить ваш заказ в любой город Казахстана. Для этого мы используем услуги надежной компании СДЭК, которая обеспечивает быструю и безопасную доставку.'
+        const eightTxt = 'При отправке в другие города цена доставки рассчитывается непосредственно в пункте выдачи СДЭК. Это означает, что вы оплачиваете стоимость доставки при получении посылки, учитывая расстояние и вес товара.'
+        const nineTxt = 'Наша практика работы основана на индивидуальном заказе, и мы не поддерживаем наличие товаров на складе. Вместо этого, мы работаем с площадкой Poizon, выкупая пары непосредственно по вашему запросу. Это позволяет нам предоставить вам широкий ассортимент товаров и обеспечить доступность интересующих вас моделей.'
+        const tenTxt = 'Да, все цены в профиле уже рассчитаны с учетом доставки до Алматы. Это значит, что вы видите окончательную стоимость товара, включая стоимость доставки. Таким образом, нет необходимости беспокоиться о скрытых дополнительных расходах или непредвиденных сюрпризах при оформлении заказа.'
+
+        const plus = "{% static 'images/faq/plus.svg' %}"
+        const minus = "{% static 'images/faq/minus.svg' %}"
+
+        const firstInfo = document.getElementById('faq-1');
+        const firstImg = document.getElementById('img1');
+
+        const secondInfo = document.getElementById('faq-2');
+        const secondImg = document.getElementById('img2');
+
+        const thirdInfo = document.getElementById('faq-3');
+        const thirdImg = document.getElementById('img3');
+
+        const fourthInfo = document.getElementById('faq-4');
+        const fourthImg = document.getElementById('img4');
+
+        const fiveInfo = document.getElementById('faq-5');
+        const fiveImg = document.getElementById('img5');
+
+        const sixInfo = document.getElementById('faq-6');
+        const sixImg = document.getElementById('img6');
+
+        const sevenInfo = document.getElementById('faq-7');
+        const sevenImg = document.getElementById('img7');
+
+        const eightInfo = document.getElementById('faq-8');
+        const eightImg = document.getElementById('img8');
+
+        const nineInfo = document.getElementById('faq-9');
+        const nineImg = document.getElementById('img9');
+
+        const tenInfo = document.getElementById('faq-10');
+        const tenImg = document.getElementById('img10');
+
+        if (question === '1') {
+            if (firstInfo.innerText === firstTxt) {
+                firstInfo.innerText = ''
+                firstImg.src = plus  
+
+            } else {
+                firstInfo.innerText = firstTxt
+                firstImg.src = minus
+            }
+        } else if (question === '2') {
+            if (secondInfo.innerText === secondTxt) {
+                secondInfo.innerText = ''
+                secondImg.src = plus  
+            } else {
+                secondInfo.innerText = secondTxt
+                secondImg.src = minus
+            }
+        } else if (question === '3') {
+            if (thirdInfo.innerText === thirdTxt) {
+                thirdInfo.innerText = ''
+                thirdImg.src = plus  
+            } else {
+                thirdInfo.innerText = thirdTxt
+                thirdImg.src = minus
+            }
+        } else if (question === '4') {
+            if (fourthInfo.innerText === fourthTxt) {
+                fourthInfo.innerText = ''
+                fourthImg.src = plus  
+            } else {
+                fourthInfo.innerText = fourthTxt
+                fourthImg.src = minus
+            }
+        } else if (question === '5') {
+            if (fiveInfo.innerText === fiveTxt) {
+                fiveInfo.innerText = ''
+                fiveImg.src = plus  
+            } else {
+                fiveInfo.innerText = fiveTxt
+                fiveImg.src = minus
+            }
+        } else if (question === '6') {
+            if (sixInfo.innerText === sixTxt) {
+                sixInfo.innerText = ''
+                sixImg.src = plus  
+            } else {
+                sixInfo.innerText = sixTxt
+                sixImg.src = minus
+            }
+        } else if (question === '7') {
+            if (sevenInfo.innerText === sevenTxt) {
+                sevenInfo.innerText = ''
+                sevenImg.src = plus  
+            } else {
+                sevenInfo.innerText = sevenTxt
+                sevenImg.src = minus
+            }
+        } else if (question === '8') {
+            if (eightInfo.innerText === eightTxt) {
+                eightInfo.innerText = ''
+                eightImg.src = plus  
+            } else {
+                eightInfo.innerText = eightTxt
+                eightImg.src = minus
+            }
+        } else if (question === '9') {
+            if (nineInfo.innerText === nineTxt) {
+                nineInfo.innerText = ''
+                nineImg.src = plus  
+            } else {
+                nineInfo.innerText = nineTxt
+                nineImg.src = minus
+            }
+        } else if (question === '10') {
+            if (tenInfo.innerText === tenTxt) {
+                tenInfo.innerText = ''
+                tenImg.src = plus  
+            } else {
+                tenInfo.innerText = tenTxt
+                tenImg.src = minus
+            }
+        } 
+    }
+</script>
+</div>
+{% endblock main %}

@@ -16,8 +16,9 @@ class Type(models.Model):
 """Модель баннера"""
 class Banner(models.Model):
     name = models.CharField(max_length=150)
+    url = models.URLField(max_length=200)
     image = models.ImageField(upload_to='banners/')
-    category = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name='Категория')
+    category = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name='Категория', related_name='banners')
 
     class Meta:
         verbose_name = 'Баннер'
@@ -195,3 +196,15 @@ class ImageClothLink(models.Model):
         return (
             f'{self.product}: {self.img}'
         )
+
+
+class Order(models.Model):
+    code = models.CharField(max_length=200)
+    cart = models.JSONField(default=dict)
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+    def __str__(self) -> str:
+        return self.code
