@@ -17,10 +17,18 @@
         
         <div class="info-box">
             <div class="bttns">
-                <button onclick="showCategory('category1')">Описание</button>
-                <button onclick="showCategory('category2')">Доставка</button>
-                <button onclick="showCategory('category3')">Способы оплаты</button>
-                <button onclick="showCategory('category4')">FAQ</button>
+                <div>
+                    <button onclick="showCategory('category1')">Описание</button>
+                </div>
+                <div>
+                    <button onclick="showCategory('category2')">Доставка</button>
+                </div>
+                <div>
+                    <button onclick="showCategory('category3')">Способы оплаты</button>
+                </div>
+                <div>
+                    <a href="{% url "goods:faq" %}">FAQ</a>
+                </div>
             </div>
             <div class="content-info" id="category-content">
                 {{ product.description }}
@@ -43,11 +51,42 @@
                     if (category === 'category1') {
                         contentInfo.innerText = cont;
                     } else if (category === 'category2') {
-                        contentInfo.innerText = 'Доставка';
+                        contentInfo.innerHTML = `
+                            <h5>1.	Сколько занимает доставка из High-End Hill?</h5>
+                            Средний срок доставки товара от момента покупки до его прибытия в наш магазин в Алматы составляет 10-20 дней.<br><br>
+                            
+                            <h5>2.	Что происходит с заказом после оплаты?</h5>
+                            После оформления заказа и оплаты, процесс доставки протекает следующим образом:<br><br>
+                            1. Заказ передается на закупку. Этот этап занимает от 1 до 3 часов в рабочее время.<br>
+                            2. После выкупа мы ожидаем поступления товара на наш склад в Китае. Обычно это занимает от 2 до 3 дней. Однако, в некоторых случаях товар может прибыть уже через 1 день или затянуться до 6 дней.<br>
+                            3. После получения товара на складе в Китае, мы отправляем его в Казахстан на следующий день. Срок доставки до нашего магазина в Алматы составляет около 10-15 дней.<br>
+                            4. После прибытия товара, наш менеджер свяжется с вами для дальнейших инструкций и уточнения информации о получении заказа.<br><br>
+                            
+                            <h5>3.	Как работает система доставки в High End Hill?</h5>
+                            После оформления заказа и оплаты, у вас будет возможность выбрать удобный способ доставки и указать необходимые данные получателя. Вот варианты доставки, которые мы предлагаем:
+                            <br><br>
+                            1. Для доставки в Алматы:<br><br>
+                            •	Самовывоз из нашего магазина. Если вы находитесь в Алматы и предпочитаете самостоятельно забрать заказ, вы можете приехать в наш пункт выдачи по адресу: проспект Жибек Жолы 76.<br><br>
+                            •	Курьерская доставка до вашего адреса. Мы осуществляем доставку вашего заказа курьерской службой прямо до вашей двери.<br><br>
+                            
+                            2. Для заказов, отправляемых в другие города Казахстана:<br><br>
+                            •	Самовывоз из пункта выдачи СДЭК. Вы сможете выбрать удобный для вас пункт выдачи в вашем городе. Как только мы получим ваш заказ в Алматы, мы отправим его в указанный вами пункт выдачи СДЭК.<br><br>
+                            •	Доставка курьером СДЭК до вашего дома. Мы организуем доставку вашего заказа курьером прямо к вам по указанному адресу.<br><br>
+                            
+                            <h5>4.	Как обеспечивается сохранность заказа при доставке?</h5>
+                            Наши доставки осуществляются с полной гарантией сохранности вашего заказа. Мы предоставляем полное страхование и обеспечиваем своевременное и качественное исполнение всех заказов.<br><br>
+                            
+                            <h5>5.	Дополнительная информация</h5>
+                            •	Доставка по Казахстану оплачивается дополнительно?<br><br>
+                            Да, доставка из Алматы до вашего города или по городу Алматы оплачивается отдельно при получении. Стоимость доставки рассчитывается непосредственно в пункте СДЭК или в приложении доставки курьером.<br><br>
+                            •	Если у меня нет СДЭК, могу я оформить доставку КазПочтой или другой компанией?<br><br>
+                            Да, вы можете оформить доставку почтой Казахстана или любой другой компанией. Для этого с вами свяжется менеджер и уточнит все детали и ваши предпочтения.<br><br>
+                            •	На кого я могу оформить покупку?<br><br>
+                            Оформление заказа вы можете делать как на себя, так и на другого человека. Например, если хотите сделать кому-то подарок или занимаетесь перепродажей кроссовок, то вы сразу можете оформить доставку до адреса вашего покупателя.
+                            
+                        `;
                     } else if (category === 'category3') {
                         contentInfo.innerText = 'Способы оплаты';
-                    } else if (category === 'category4') {
-                        contentInfo.innerText = 'FAQ';
                     }
                 }
             </script>
@@ -77,12 +116,14 @@
         <div class="add_to_buy">
             <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
                 {% csrf_token %}
+                <input type="hidden" name="selected_size" id="selected-size" value="">
                 <button type="submit" class="add-to-cart-btn">
                     <span class="btn-text">Добавить в корзину</span>
                     <span class="added-text">Добавлено</span>
                 </button>
             </form>
         </div>
+        
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -105,24 +146,37 @@
                 });
             });
         
-            addToCartForm.addEventListener('submit', function(event) {
-                const selectedSizeInput = document.getElementById('selected-size');
-                const selectedSize = selectedSizeInput.value;
-        
+            
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#add-to-cart-form').submit(function(event) {
+                event.preventDefault();
+
+                const selectedSize = $('#selected-size').val();
+
                 if (!selectedSize || selectedSize === 'None') {
-                    event.preventDefault();
                     alert('Пожалуйста, выберите размер перед добавлением в корзину!');
-        
                 } else {
-                    event.preventDefault();
-        
-                    addBtn.classList.add('added');
-                    addBtn.disabled = true;
-                    addedText.style.display = 'inline';
-        
-                    setTimeout(function() {
-                        addToCartForm.submit();
-                    }, 1000);
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),  // Отправляем данные из формы
+                        success: function(response) {
+                            $('.add-to-cart-btn').addClass('added');
+                            $('.add-to-cart-btn').attr('disabled', true);
+                            $('.added-text').css('display', 'inline');
+
+                            setTimeout(function() {
+                                // Можно добавить дополнительную логику после успешного добавления в корзину
+                            }, 1000);
+                        },
+                        error: function(xhr, errmsg, err) {
+                            console.log(xhr.status + ": " + xhr.responseText);  // Обработка ошибок
+                        }
+                    });
                 }
             });
         });

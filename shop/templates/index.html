@@ -11,54 +11,57 @@
     <div class="popular">
         <div class="text-area">
             <div class="most">
-                <a href="#"><h2>MOST POPULAR</h2></a>
+                <a href="{% url "goods:popular" %}"><h2>MOST POPULAR</h2></a>
             </div>
             <div class="text-area">
-                <a href="#"><h2>SEE ALL</h2></a>
+                <a href="{% url "goods:popular" %}"><h2>SEE ALL</h2></a>
             </div>
         </div>
         <div class="blocks">
-            {% for good in goods %}
+            {% for good in liked %}
+            <a href="{% url 'goods:shoe' good.id %}">
             <div class="content-block">
                 <div class="photo">
-                    <img src="{{good.image}}" alt="">
+                    <img src="{{good.images.url}}" alt="">
                 </div>
                 <div class="info">
-                    <h3>{{good.name}}</h3>
-                    <p>{{good.description}}</p>
+                    <h3>{{good.brand}} {{good.name}}</h3>
                     <p>ОТ {{good.price}}₸</p>
                 </div>
             </div>
+            </a>
             {% endfor %}
         </div>
             
     <div class="new-models">
         <div class="text-area">
             <div class="most">
-                <a href="#"><h2>NEW MODELS</h2></a>
+                <a href="{% url "goods:new" %}"><h2>NEW MODELS</h2></a>
             </div>
             <div class="see-all">
-                <a href="#"><h2>SEE ALL</h2></a>
+                <a href="{% url "goods:new" %}"><h2>SEE ALL</h2></a>
             </div>
         </div>
         <div class="blocks">
             {% for good in goods %}
+            <a href="{% url 'goods:shoe' good.id %}">
             <div class="content-block">
                 <div class="photo">
-                    <img src="{{good.image}}" alt="">
+                    <img src="{{good.images.url}}" alt="">
                 </div>
                 <div class="info">
-                    <h3>{{good.name}}</h3>
-                    <p>{{good.description}}</p>
+                    <h3>{{good.brand}} {{good.name}}</h3>
                     <p>ОТ {{good.price}}₸</p>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+    <a href="https://t.me/highend_hill">
     <div class="not-found">
         <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
         <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
         <!-- <img src="static/images/header/info.png" alt=""> -->
     </div>
+    </a>
 {% endblock main %}

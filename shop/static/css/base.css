@@ -5,9 +5,10 @@ body, h1, h2, h3, h4, h5, p, img, nav, li, ol, a footer{
 
 body {
     max-width: 2500px;
-    height: 100vh;
     width: 100%;
+    height: 100vh;
     font-family: "Oswald", sans-serif;
+
 }
 
 body .container{
@@ -27,8 +28,8 @@ p {
 
 .container-2 {
     margin: 0 10%;
-    overflow:hidden;
     flex: 1 1 auto;
+    /* overflow:hidden; */
 }
 
 .header-block {
@@ -159,26 +160,6 @@ h2, a {
     justify-content: space-between;
 }
 
-.blocks {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    
-    width: 100%;
-    height:auto;
-
-    margin-top: 20px;
-}
-
-.content-block {
-    max-width: 300px;
-    /* width: 100%;
-    border: black 2px solid; */
-
-    margin: 10px 35px 10px 0;
-}
-
-
 .content-block .info {
     border-top: black 2px solid;
 }
@@ -195,15 +176,19 @@ h2, a {
 
 .content-block .info p, h3 {
     font-family: "Oswald", sans-serif;
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 300;
-    margin: 7px 7px;
+    margin: 15px 10px;
 }
 
 h3 {
     font-family: "Oswald", sans-serif;
     font-size: 35px;
     font-weight: 400;
+}
+
+.size-btn h3 {
+    font-weight: 200;
 }
 
 .not-found {
@@ -236,15 +221,19 @@ h4 {
 
 h5 {
     font-family: "Oswald", sans-serif;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 25px;
+    font-weight: 400;
     padding: 15px 0;
+}
+
+.footer-div {
+    align-self: normal;
+    flex: 0 0 auto;
 }
 
 footer {
     background-color: #000;
-    color: white;
-    
+    color: white;    
 }
 
 footer {
@@ -258,7 +247,7 @@ footer {
 
 
 .nav-footer, .info-footer, .contacts-footer {
-    margin: 20px 10%;
+    margin: 20px 10% 100px 10%;
 }
 
 .nav-footer {
@@ -416,7 +405,7 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    max-width: 450px;
+    max-width: 500px;
     background-color: white;
     padding: 0;
     margin: 0;
@@ -447,21 +436,24 @@ button:hover {
 .bttns {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.bttns button {
+.bttns div button, .bttns div a {
     color: #000;
     background-color: white;
     text-transform: uppercase;
     font-weight: 200;
+    font-size: 30px;
     padding: 0;
+    margin: 0;
 }
 
 .content-info {
     margin-top: 30px;
     font-weight: 300;
     text-align: justify;
-    max-width: 600px;
+    max-width: 100%;
     font-size: 22px;
 }
 
@@ -486,10 +478,29 @@ button:hover {
 
 .inspiration {
     margin-bottom: 50px;
+    max-width: 100%;
+    width: 100%;
 }
 
-.inspiration .blocks {
-    justify-content: space-around;
+.inspiration .blocks{
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+
+
+.inspiration .blocks a .content-block {
+    border: #000 2px solid;
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+}
+
+
+.inspiration .blocks .content-block .photo img {
+    max-width: 400px;
+    height: auto;
+    width: 100%;
 }
 
 .reverse-btn {
@@ -512,9 +523,9 @@ button:hover {
 }
 
 .size-btn {
-    border: #000 solid 2px;
+    border: #000 solid 1px;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 }
 
 .size-btn.selected {
@@ -529,7 +540,7 @@ input form {
 
 .add-to-cart-btn {
     margin-top: 55px;
-    padding: 16px 25px;
+    padding: 20px 50px;
     color: black;
     border: none;
     cursor: pointer;
@@ -541,12 +552,15 @@ input form {
 .btn-text {
     color: white;
     text-transform: uppercase;
-    font-weight: 500;
+    font-size: 35px;
+    text-align: center;
+    font-weight: 400;
 }
 
 .added-text {
     display: none;
     color: green;
+    text-transform: uppercase;
     margin-left: 10px;
 }
 
@@ -663,10 +677,34 @@ ul li {
 }
 
 /* FAQ */
+.faq-blocks {
+    position: relative;
+    overflow:hidden;
+}
+
 .question {
     display: flex;
     justify-content: space-between;
 }
+
+.fa {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:300px;
+    height:300px;
+    object-fit:cover;
+}
+/* .question img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:300px;
+    height:300px;
+    object-fit:cover;
+} */
 
 .question .btn {
     max-width: 80%;
@@ -689,4 +727,130 @@ ul li {
 
 .question-block:last-of-type {
     margin-bottom: 150px;
+}
+
+/* Стилизация формы фильтров */
+/* Стилизация выпадающих списков */
+.all select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 8px;
+    margin: 5px;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    position: relative;
+    cursor: pointer;
+}
+
+.all select::-ms-expand {
+    display: none;
+}
+
+.all select option {
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.all select:after {
+    content: '\25BC';
+    font-size: 12px;
+    color: #555;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.new-models .blocks a, .popular .blocks a {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.new-models .blocks a .content-block, .popular .blocks  a .content-block{
+    border: #000 2px solid;
+}
+
+.pagination {
+    margin-top: 50px;
+}
+
+/* .blocks a {
+    display: flex;
+    justify-content: space-between;
+} */
+
+/* .blocks .content-block {
+    margin: 20px;
+} */
+
+/* * {
+    outline: 1px solid lightskyblue;
+} */
+
+
+.blocks {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    /* overflow:hidden; */
+    width: 100%;
+    height:auto;
+    font-size: 90px;
+
+    margin-top: 20px;
+}
+
+.blocks-catalog {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.content-block {
+    max-width: 300px;
+
+    width: 100%;
+    border: black 2px solid;
+}
+
+.content-block :last-child{
+    margin-right: 0;
+}
+
+.blocks-catalog .content-block{
+    border: none;
+    display: inline-block;
+    margin: 10px 35px 10px 0;
+}
+
+.name-box h1{
+    font-weight: 400;
+}
+
+
+
+.centered-number-input {
+    display: flex;
+    align-items: center;
+}
+
+.decrement, .increment {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quantity {
+    padding: 5px 10px;
+    text-align: center;
+    width: 50px;
 }

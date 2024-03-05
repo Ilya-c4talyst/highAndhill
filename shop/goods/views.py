@@ -16,15 +16,43 @@ from .models import Product, Brand, Banner, Size, Type, Order
 
 def index(request):
     products = Product.objects.all()
+    ln = len(products)
+    products = products[ln-5:]
+    liked = Product.objects.filter(most_liked=True)
     type = get_object_or_404(Type, name="main")
     banners = type.banners.all()
     ln = len(banners)
     banner = banners[random.randint(0, ln-1)]
     context = {
-        "products": products,
+        'liked': liked,
+        "goods": products,
         'banner': banner
     }
     return render(request, 'index.html', context=context)
+
+
+def popular(request):
+    products = Product.objects.filter(most_liked=True)
+    context = {
+        "goods": products,
+    }
+    return render(request, 'liked/liked.html', context=context)
+
+
+def newest(request):
+    products = Product.objects.all().order_by('-id')
+    context = {
+        "goods": products,
+    }
+    return render(request, 'liked/newest.html', context=context)
+
+
+def popular(request):
+    products = Product.objects.filter(most_liked=True)
+    context = {
+        "goods": products,
+    }
+    return render(request, 'liked/liked.html', context=context)
 
 
 def shoes(request):
@@ -41,6 +69,7 @@ def shoes(request):
     
     search_query = request.GET.get('search_query')
 
+
     if search_query:
         products = products.filter(name__icontains=search_query)
 
@@ -51,6 +80,7 @@ def shoes(request):
     selected_size = request.GET.get('sizes')
     if selected_size:
         products = products.filter(sizes__id=selected_size)
+
 
 
     flag = True
@@ -93,15 +123,14 @@ def shoescart(request, product_id):
             'quantity': cart.get(product_id, {}).get('quantity', 0) + 1
         }
         request.session['cart'] = cart
-        
-        messages.success(request, 'Товар успешно добавлен в корзину!')
+
         return redirect('goods:shoe', product_id=product_id)
     
     product = get_object_or_404(Product, id=product_id)
     all_products = Product.objects.all()
     ln_products = len(all_products)
     look_at = []
-    for _ in range(3):
+    for _ in range(4):
         look_at.append(all_products[random.randint(0, ln_products-1)])
 
     context = {

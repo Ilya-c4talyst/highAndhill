@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main %}
+<div class="blocks-catalog">
+    {% for good in goods %}
+    <div class="content-block">
+        <a href="{% url 'goods:shoe' good.id %}">
+        <div class="photo">
+            <img src="{{good.images.url}}" alt="">
+        </div>
+        <div class="info">
+            <h3>{{good.brand}}</h3>
+            <p>{{good.name}}</p>
+            <p>ОТ {{good.price}} ₸</p>
+        </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<div class="pagination">
+    <div class="step-links">
+        {% if goods.has_previous %}
+            <div class="arrow">
+                <a href="?page={{ goods.previous_page_number }}"><img src="{% static 'images/footer/left.svg' %}" alt=""></a>
+            </div>
+            <div class="previous_page">
+                <a href="?page={{ goods.previous_page_number }}">{{ goods.previous_page_number }}</a>
+            </div>
+        {% endif %}
+
+        <div class="current">
+            <a>{{ goods.number }}</a>
+        </div>
+
+        {% if goods.has_next %}
+            <div class="next_page">
+                <a href="?page={{ goods.next_page_number }}">{{ goods.next_page_number }}</a>
+            </div>
+            <div class="arrow">
+                <a href="?page={{ goods.next_page_number }}"><img src="{% static 'images/footer/right.svg' %}" alt=""></a>
+            </div>
+        {% endif %}
+        </div>
+</div> 
+
+{% endblock main %}

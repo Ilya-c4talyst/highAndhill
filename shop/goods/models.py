@@ -69,6 +69,7 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
+    most_liked = models.BooleanField(default=False)
     images = models.ImageField(upload_to='products/')
     show_images = models.ManyToManyField(
         Image,
