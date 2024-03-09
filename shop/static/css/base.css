@@ -4,11 +4,10 @@ body, h1, h2, h3, h4, h5, p, img, nav, li, ol, a footer{
 }
 
 body {
-    max-width: 2500px;
+    max-width: 2800px;
     width: 100%;
     height: 100vh;
     font-family: "Oswald", sans-serif;
-
 }
 
 body .container{
@@ -233,7 +232,7 @@ h5 {
 
 footer {
     background-color: #000;
-    color: white;    
+    color: white;  
 }
 
 footer {
@@ -777,6 +776,7 @@ ul li {
 
 .pagination {
     margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 /* .blocks a {
@@ -853,4 +853,33 @@ ul li {
     padding: 5px 10px;
     text-align: center;
     width: 50px;
+}
+
+
+
+.filter-toggle {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f8f9fa;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.filter-area {
+    display: none; /* изначально свернуто */
+    padding: 10px;
+    background-color: white;
+}
+
+.filter-area form {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-area form select {
+    max-width: 180px;
+    width: 100%;
+    margin: 0 20px;
 }

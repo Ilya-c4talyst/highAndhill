@@ -12,26 +12,67 @@
     {% endfor %}
 </div>
 <div class="list_goods">
+    <div class="filter-toggle">Фильтры</div>
     <div class="filter-area">
-        <div class="all">
-            <form method="GET" action="{% url 'goods:shoes' %}">
-                <input type="text" name="search_query" placeholder="Поиск..." value="{{ request.GET.search_query }}">
-                <select name="brand">
-                    <option value="">All Brands</option>
-                    {% for brand in brands %}
-                        <option value="{{ brand.id }}" {% if brand.id == request.GET.brand %} selected {% endif %}>{{ brand.name }}</option>
-                    {% endfor %}
-                </select>
-                <select name="sizes">
-                    <option value="">All Sizes</option>
-                    {% for size in sizes %}
-                        <option value="{{ size.id }}" {% if size.id == request.GET.sizes %} selected {% endif %}>{{ size.size }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Применить</button>
-            </form>
-        </div>
+        <form method="GET" action="{% url 'goods:shoes' %}" class="filter-form">
+            <input type="text" name="search_query" placeholder="Поиск..." value="{{ request.GET.search_query }}">
+
+            <select name="brand">
+                <option value="">Все бренды</option>
+                {% for brand in brands %}
+                    <option value="{{ brand.id }}" {% if brand.id == request.GET.brand %}selected{% endif %}>{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="sizes">
+                <option value="">Все размеры</option>
+                {% for size in sizes %}
+                    <option value="{{ size.id }}" {% if size.id == request.GET.sizes %}selected{% endif %}>{{ size.size }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="number" name="min_price" placeholder="Цена от" value="{{ request.GET.min_price }}">
+            <input type="number" name="max_price" placeholder="Цена до" value="{{ request.GET.max_price }}">
+
+            <button type="submit">Применить</button>
+        </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var filterToggle = document.querySelector('.filter-toggle');
+            var filterArea = document.querySelector('.filter-area');
+            
+            filterToggle.addEventListener('click', function() {
+                filterArea.style.display = filterArea.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
+    {% comment %} <div class="filter">
+        <form method="GET" action="{% url 'goods:shoes' %}">
+        <h3>Price Range:</h3>
+        <input type="text" name="min_price" placeholder="Min Price">
+        <input type="text" name="max_price" placeholder="Max Price">
+    
+        <h3>Brands:</h3>
+        <ul>
+            {% for brand in brands %}
+                <li><input type="checkbox" name="brand" value="{{ brand.id }}"> {{ brand.name }}</li>
+            {% endfor %}
+        </ul>
+    
+        <h3>Sizes:</h3>
+        <ul>
+            {% for size in sizes %}
+                <li><input type="checkbox" name="size" value="{{ size.id }}"> {{ size.size }}</li>
+            {% endfor %}
+        </ul>
+    
+        <button type="submit">Apply Filter</button>
+    </form>
+    </div> {% endcomment %}
+    
+    
+</div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const selectedBrand = '{{ request.GET.brand }}';

@@ -17,7 +17,7 @@ from .models import Product, Brand, Banner, Size, Type, Order
 def index(request):
     products = Product.objects.all()
     ln = len(products)
-    products = products[ln-5:]
+    products = products[ln-4:]
     liked = Product.objects.filter(most_liked=True)
     type = get_object_or_404(Type, name="main")
     banners = type.banners.all()
@@ -56,10 +56,6 @@ def popular(request):
 
 
 def shoes(request):
-    products = Product.objects.all()
-    brands = Brand.objects.all()
-    sizes = Size.objects.all()
-
     type = get_object_or_404(Type, name="shoes")
     banners = type.banners.all()
     ln = len(banners)
@@ -67,9 +63,11 @@ def shoes(request):
     for _ in range(3):
         info.append(banners[random.randint(0, ln-1)])
     
+    products = Product.objects.filter(type__name="shoes")
+    brands = Brand.objects.all()
+    sizes = Size.objects.all()
+
     search_query = request.GET.get('search_query')
-
-
     if search_query:
         products = products.filter(name__icontains=search_query)
 
@@ -81,6 +79,11 @@ def shoes(request):
     if selected_size:
         products = products.filter(sizes__id=selected_size)
 
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    if min_price and max_price:
+        products = products.filter(price__gte=min_price, price__lte=max_price)
+
 
 
     flag = True
@@ -91,7 +94,6 @@ def shoes(request):
 
     paginator = Paginator(products, 10)
     page = request.GET.get('page')
-    
     try:
         goods = paginator.page(page)
     except PageNotAnInteger:
