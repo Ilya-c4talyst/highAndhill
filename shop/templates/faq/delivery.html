@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<div class="faq-blocks">
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('1')">Сколько занимает доставка из High-End Hill?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img1'>
+            </div>
+        </div>
+        <div class="answer" id='faq-1'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}" id='fa'>
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('2')">Что происходит с заказом после оплаты?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img2'>
+            </div>
+        </div>
+        <div class="answer" id='faq-2'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('3')">Как работает система доставки в High End Hill?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img3'>
+            </div>
+        </div>
+        <div class="answer" id='faq-3'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('4')">Как обеспечивается сохранность заказа при доставке?</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img4'>
+            </div>
+        </div>
+        <div class="answer" id='faq-4'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+    <div class="question-block">
+        <div class="question">
+            <div class="btn">
+                <button onclick="showFaq('5')">Дополнительная информация</button>
+            </div>
+            <div class="plus">
+                <img src="{% static 'images/faq/plus.svg' %}" id='img5'>
+            </div>
+        </div>
+        <div class="answer" id='faq-5'>
+        </div>
+        <img src="{% static 'images/faq/faq-line.png' %}">
+    </div>
+
+<script>
+    function showFaq(question) {
+        const firstTxt = `Средний срок доставки товара от момента покупки до его прибытия в наш магазин в Алматы составляет 10-20 дней.<br><br>`
+        const secondTxt = `После оформления заказа и оплаты, процесс доставки протекает следующим образом:<br><br>
+        1. Заказ передается на закупку. Этот этап занимает от 1 до 3 часов в рабочее время.<br>
+        2. После выкупа мы ожидаем поступления товара на наш склад в Китае. Обычно это занимает от 2 до 3 дней. Однако, в некоторых случаях товар может прибыть уже через 1 день или затянуться до 6 дней.<br>
+        3. После получения товара на складе в Китае, мы отправляем его в Казахстан на следующий день. Срок доставки до нашего магазина в Алматы составляет около 10-15 дней.<br>
+        4. После прибытия товара, наш менеджер свяжется с вами для дальнейших инструкций и уточнения информации о получении заказа.<br><br>`
+        const thirdTxt = `После оформления заказа и оплаты, у вас будет возможность выбрать удобный способ доставки и указать необходимые данные получателя. Вот варианты доставки, которые мы предлагаем:
+        <br><br>
+        1. Для доставки в Алматы:<br><br>
+        •	Самовывоз из нашего магазина. Если вы находитесь в Алматы и предпочитаете самостоятельно забрать заказ, вы можете приехать в наш пункт выдачи по адресу: проспект Жибек Жолы 76.<br><br>
+        •	Курьерская доставка до вашего адреса. Мы осуществляем доставку вашего заказа курьерской службой прямо до вашей двери.<br><br>
+        
+        2. Для заказов, отправляемых в другие города Казахстана:<br><br>
+        •	Самовывоз из пункта выдачи СДЭК. Вы сможете выбрать удобный для вас пункт выдачи в вашем городе. Как только мы получим ваш заказ в Алматы, мы отправим его в указанный вами пункт выдачи СДЭК.<br><br>
+        •	Доставка курьером СДЭК до вашего дома. Мы организуем доставку вашего заказа курьером прямо к вам по указанному адресу.<br><br>
+        `
+        const fourthTxt = `Наши доставки осуществляются с полной гарантией сохранности вашего заказа. Мы предоставляем полное страхование и обеспечиваем своевременное и качественное исполнение всех заказов.<br><br>`
+        const fiveTxt = `•	Доставка по Казахстану оплачивается дополнительно?<br><br>
+        Да, доставка из Алматы до вашего города или по городу Алматы оплачивается отдельно при получении. Стоимость доставки рассчитывается непосредственно в пункте СДЭК или в приложении доставки курьером.<br><br>
+        •	Если у меня нет СДЭК, могу я оформить доставку КазПочтой или другой компанией?<br><br>
+        Да, вы можете оформить доставку почтой Казахстана или любой другой компанией. Для этого с вами свяжется менеджер и уточнит все детали и ваши предпочтения.<br><br>
+        •	На кого я могу оформить покупку?<br><br>
+        Оформление заказа вы можете делать как на себя, так и на другого человека. Например, если хотите сделать кому-то подарок или занимаетесь перепродажей кроссовок, то вы сразу можете оформить доставку до адреса вашего покупателя.`
+
+        const plus = "{% static 'images/faq/plus.svg' %}"
+        const minus = "{% static 'images/faq/minus.svg' %}"
+
+        const firstInfo = document.getElementById('faq-1');
+        const firstImg = document.getElementById('img1');
+
+        const secondInfo = document.getElementById('faq-2');
+        const secondImg = document.getElementById('img2');
+
+        const thirdInfo = document.getElementById('faq-3');
+        const thirdImg = document.getElementById('img3');
+
+        const fourthInfo = document.getElementById('faq-4');
+        const fourthImg = document.getElementById('img4');
+
+        const fiveInfo = document.getElementById('faq-5');
+        const fiveImg = document.getElementById('img5');
+
+        if (question === '1') {
+            if (firstInfo.innerHTML === firstTxt) {
+                firstInfo.innerText = ''
+                firstImg.src = plus  
+
+            } else {
+                firstInfo.innerHTML = firstTxt
+                firstImg.src = minus
+            }
+        } else if (question === '2') {
+            if (secondInfo.innerHTML === secondTxt) {
+                secondInfo.innerText = ''
+                secondImg.src = plus  
+            } else {
+                secondInfo.innerHTML = secondTxt
+                secondImg.src = minus
+            }
+        } else if (question === '3') {
+            if (thirdInfo.innerHTML === thirdTxt) {
+                thirdInfo.innerText = ''
+                thirdImg.src = plus  
+            } else {
+                thirdInfo.innerHTML = thirdTxt
+                thirdImg.src = minus
+            }
+        } else if (question === '4') {
+            if (fourthInfo.innerHTML === fourthTxt) {
+                fourthInfo.innerText = ''
+                fourthImg.src = plus  
+            } else {
+                fourthInfo.innerHTML = fourthTxt
+                fourthImg.src = minus
+            }
+        } else if (question === '5') {
+            if (fiveInfo.innerHTML === fiveTxt) {
+                fiveInfo.innerText = ''
+                fiveImg.src = plus  
+            } else {
+                fiveInfo.innerHTML = fiveTxt
+                fiveImg.src = minus
+            }
+        }
+    }
+</script>
+</div>
+{% endblock main %}

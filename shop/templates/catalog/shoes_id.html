@@ -86,7 +86,18 @@
                             
                         `;
                     } else if (category === 'category3') {
-                        contentInfo.innerText = 'Способы оплаты';
+                        contentInfo.innerHTML = `
+                        <h5>1.	Какие варианты оплаты доступны?</h5>
+                        Вы можете оплатить свой заказ удобным для вас способом: картой казахстанского банка Visa или MasterCard, а также через Kaspi банк или по выставленному счету.<br><br>
+                        
+                        <h5>2.	Как происходит процесс оформления заказа?</h5>
+                        Для оформления заказа вам нужно выбрать интересующий товар и добавить его в корзину. Затем перейдите в корзину, где вы получите уникальный код заказа. С этим кодом вы будете автоматически направлены к нашему менеджеру для уточнения деталей заказа и его оплаты.<br><br>
+                        
+                        Оплата заказа осуществляется в конце процесса его оформления. После оформления заказа ваша заявка передается менеджеру, который свяжется с вами для проведения оплаты. После успешного получения платежа мы резервируем выбранный вами товар. Пожалуйста, обратите внимание, что цена и наличие товаров могут быть подвержены изменениям до момента оплаты.<br><br>
+                        
+                        <h5>3.	Нужно ли дополнительно оплачивать налоги, таможенные сборы или доставку?</h5>
+                        Нет, не нужно, все налоги, таможенные сборы, доставка и цена за товар уже включены в итоговую стоимость. Отдельно оплачивается только доставка по городу или отправка в другие города.<br>
+                        `;
                     }
                 }
             </script>
@@ -101,20 +112,32 @@
             <h2>ОТ {{product.price}}₸</h2>
         </div>
         <div class="sizes-box">
-            <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
+            {% if product.type|default_if_none:""|force_escape == 'shoes' %}
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
+            {% else %}
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:clothes_add_to_cart' product_id=product.id %}">
+            {% endif %}
                 {% csrf_token %}
                 <input type="hidden" name="size" id="selected-size">
                 {% for size in product.sizes.all %}
                     <div class="size">
                         <button type="button" class="size-btn" data-size="{{ size }}">
-                            <h3>{{ size }} EU</h3>
+                            {% if product.type|default_if_none:""|force_escape == 'shoes' %}
+                                <h3>{{ size }} EU</h3>
+                            {% else %}
+                                <h3>{{ size }}</h3>
+                            {% endif %}
                         </button>
                     </div>
                 {% endfor %}
 
         </div>
         <div class="add_to_buy">
-            <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
+            {% if product.type|default_if_none:""|force_escape == 'shoes' %}
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
+            {% else %}
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:clothes_add_to_cart' product_id=product.id %}">
+            {% endif %}
                 {% csrf_token %}
                 <input type="hidden" name="selected_size" id="selected-size" value="">
                 <button type="submit" class="add-to-cart-btn">
@@ -186,4 +209,5 @@
 {% block content %}
     {% include "includes/others.html" %}
     {% include "includes/reverse.html" %}
+</div>
 {% endblock content %}

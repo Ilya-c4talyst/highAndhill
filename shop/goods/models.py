@@ -70,6 +70,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
     most_liked = models.BooleanField(default=False)
+    on_sale = models.BooleanField(default=False)
     images = models.ImageField(upload_to='products/')
     show_images = models.ManyToManyField(
         Image,
@@ -145,6 +146,7 @@ class Cloth(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
     images = models.ImageField(upload_to='products/', blank=True)
+    on_sale = models.BooleanField(default=False)
     show_images = models.ManyToManyField(
         Image,
         through='ImageClothLink'
@@ -177,7 +179,7 @@ class ClothSizeLink(models.Model):
 
     def __str__(self):
         return (
-            f'{self.product}: {self.size}'
+            f'{self.cloth}: {self.size}'
         )
 
 

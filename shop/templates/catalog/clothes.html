@@ -15,7 +15,7 @@
     <div class='fltrs'>
         <div class="filter-toggle">ФИЛЬТРЫ</div>
         <div class="filter-area">
-            <form method="GET" action="{% url 'goods:shoes' %}">
+            <form method="GET" action="{% url 'goods:clothes' %}">
                 <div class='filter-srch'>
                     <input type="text" name="search_query" placeholder="Поиск по названию..." value="{{ request.GET.search_query }}">
                 </div>
@@ -51,7 +51,7 @@
     <div class="blocks-catalog">
         {% for good in goods %}
         <div class="content-block">
-            <a href="{% url 'goods:shoe' good.id %}">
+            <a href="{% url 'goods:cloth' good.id %}">
             <div class="photo">
                 <img src="{{good.images.url}}" alt="">
             </div>

@@ -24,13 +24,13 @@
                     </div>
                     <nav class="nav-1">
                         <div class="nav-item">
-                            <p>SALE</p>
+                            <a href="{% url "goods:sale" %}"><p>SALE</p></a>
                         </div>
                         <div class="nav-item">
                             <a href="{% url "goods:shoes" %}"><p>ОБУВЬ</p></a>
                         </div>
                         <div class="nav-item">
-                            <p>ОДЕЖДА</p>
+                            <a href="{% url "goods:clothes" %}"><p>ОДЕЖДА</p></a>
                         </div>
                         <div class="nav-item">
                             <p>АКСЕССУАРЫ</p>
@@ -121,11 +121,11 @@
                         <h5>РАЗДЕЛЫ</h5>
                     </div>
                     <div class="foot-content">
-                        <p>SALE</p>
-                        <p>ОБУВЬ</p>
-                        <p>АКСЕССУАРЫ</p>
-                        <p>ОДЕЖДА</p>
-                        <p>БРЕНДЫ</p>
+                        <a href="{% url "goods:sale" %}"><p>SALE</p></a>
+                        <a href="{% url "goods:shoes" %}"><p>ОБУВЬ</p></a>
+                        <a href="{% url "goods:clothes" %}"><p>АКСЕССУАРЫ</p></a>
+                        <a href="{% url "goods:clothes" %}"><p>ОДЕЖДА</p></a>
+                        <h3>2022-2023 Ⓒ HIGH END HILL</h3>
                     </div>
                 </div>
                 <div class="info-footer">
@@ -133,11 +133,11 @@
                         <h5>ИНФОРМАЦИЯ</h5>
                     </div>
                     <div class="foot-content">
-                        <p>КОНТАКТЫ</p>
-                        <p>ДОСТАВКА</p>
-                        <p>ОПЛАТА</p>
-                        <p>ВОЗВРАТ</p>
-                        <p>FAQ</p>
+                        <a href="{% url "goods:delivery" %}"><p>КОНТАКТЫ</p></a>
+                        <a href="{% url "goods:delivery" %}"><p>ДОСТАВКА</p></a>
+                        <a href="{% url "goods:payment" %}"><p>ОПЛАТА</p></a>
+                        <a href="{% url "goods:return" %}"><p>ВОЗВРАТ</p></a>
+                        <a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>
                     </div>
                 </div>
                 <div class="contacts-footer">
@@ -148,7 +148,7 @@
                         <p>8 (929) 665 44 19</p>
                         <p>highend.hill@mail.ru</p>
                         <p>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</p>
-                        <p>Значок 1</p>
+                        <img src={% static 'images/faq/Icon.png' %}>
                         <p>Значок 2</p>
                     </div>
                 </div>

@@ -2,12 +2,31 @@
 {% load static %}
 
 {% block main %}
-
+{% if not cart_items %}
+    <div class="name-empty">
+        <h2>КОРЗИНА</h2>
+    </div>
+    <div class='empty_cart'>
+        <a href={% url 'goods:shoes' %}>
+            <div class='empty'>
+                <p>КОРЗИНА ПУСТА</p>
+            </div>
+            <div class='empty'>
+                <p>ПОРА ПЕРЕХОДИТЬ К ПОКУПКАМ</p>
+            </div>
+            <div class='empty'>
+                <img src={% static 'images/faq/arrowDown.svg' %}>
+            </div>
+        </a>
+    </div>
+{% endif %}
 <div class="cart-box">
     <div class="positions-cart">
+        {% if cart_items %}
         <div class="name">
             <h2>КОРЗИНА</h2>
         </div>
+        {% endif %}
         <div class="positions">
             <ul>
                 {% for item in cart_items %}
@@ -29,35 +48,22 @@
                                 <h2>{{item.product.name}} ({{item.size}})</h2>
                             </div>
                             <div class="form-block">
+
                                 <form method="post" action="{% url 'goods:update_cart' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="product_id" value="{{ item.product.id }}">
                                     {% comment %} <input type="number" name="quantity" value="{{ item.quantity }}" min="1"> {% endcomment %}
                                     <div class="centered-number-input">
                                         <button class="decrement"><img width="24" height="24" src="https://img.icons8.com/material-rounded/24/minus.png" alt="minus"/></button>
-                                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="quantity">
+                                        <input type="number" name="quantity_{{ item.product.id }}" value="{{ item.quantity }}" min="1" class="quantity">
                                         <button class="increment"><img width="24" height="24" src="https://img.icons8.com/android/24/plus.png" alt="plus"/></button>
                                     </div>
+                                    
                                     {% comment %} <button type="submit">
                                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABIElEQVR4nO3USUoDYRAF4E/BlRo33sBh6wDuRFTwVmKCXiKaIwhKtkoWuYORXMEhgsaFu5aGCrQi3b9DwEUeNHTDq/dq6Com+AMcoIU+XvGCHs6w9xvhVXSRVTzXWCnENVLEd/AUAnc4xDpmUcMGjnEfnAG2QjxLyXwkfo75Eu4i2sF9K1RVim5BfCqh2pmYSbFtpQMdtaUs8yJGbUkyaAUh7/lPxbOygH4Q1owJwzCY8w9Ri+Sex2WwGQa3ZaSvBtZINKgHv/kdg0ai+AIeImY/1aAXS1SFaVxGTKeKnH1a+3acg7LML4L7iKUUg3ocrkF856WfxBAXYsPz96NCW3Lx7YRqP/R8GVcJ57qTknkZdnGKm/jHhzGfZtVAJ5CCdywscWCgJHMnAAAAAElFTkSuQmCC">
                                     </button> {% endcomment %}
                                 </form>
                             </div>
-                            <script>
-                                const decrementBtn = document.querySelector('.decrement');
-                                const incrementBtn = document.querySelector('.increment');
-                                const quantityInput = document.querySelector('.quantity');
-
-                                decrementBtn.addEventListener('click', function() {
-                                    if (parseInt(quantityInput.value) > 1) {
-                                        quantityInput.value = parseInt(quantityInput.value) - 1;
-                                    }
-                                });
-
-                                incrementBtn.addEventListener('click', function() {
-                                    quantityInput.value = parseInt(quantityInput.value) + 1;
-                                });
-                            </script>
 
                         </div>
                         <div class="delete">
@@ -72,6 +78,25 @@
                     </li>
                 </div>
                 {% endfor %}
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.querySelectorAll('.form-block').forEach(formBlock => {
+                            const decrementBtn = formBlock.querySelector('.decrement');
+                            const incrementBtn = formBlock.querySelector('.increment');
+                            const quantityInput = formBlock.querySelector('.quantity');
+                
+                            decrementBtn.addEventListener('click', function() {
+                                if (parseInt(quantityInput.value) > 1) {
+                                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                                }
+                            });
+                
+                            incrementBtn.addEventListener('click', function() {
+                                quantityInput.value = parseInt(quantityInput.value) + 1;
+                            });
+                        });
+                    });
+                </script>
             </ul>
         </div>
     </div>

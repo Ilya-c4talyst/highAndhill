@@ -1,36 +1,271 @@
-<!DOCTYPE html>
-<html>
+{% comment %} <!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>Dynamic Block Content</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фильтры для магазина одежды</title>
     <style>
-        .content-block {
-            background-color: #f9f9f9;
+        body, h2, .filter-toggle, .filter-area form {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .filter-sidebar {
+            background-color: #fff;
+            width: 200px; /* Ширина боковой панели */
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .filter-sidebar h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #000;
+            margin-bottom: 20px;
+        }
+
+        .filter-toggle {
+            font-size: 18px;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            cursor: pointer;
+            background-color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .filter-toggle:not(:first-child) {
+            border-top: none; /* Убираем верхнюю границу для всех кроме первого элемента */
+        }
+
+        .filter-toggle::after {
+            content: "+";
+            display: block;
+        }
+
+        .filter-toggle.active::after {
+            content: "-";
+        }
+
+        .filter-area {
+            display: none;
             padding: 20px;
-            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .filter-area form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-area label,
+        .filter-area input,
+        .filter-area select {
+            margin-bottom: 10px;
+        }
+
+        .filter-area button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #000;
+            color: #fff;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <div>
-        <button onclick="showCategory('category1')">Категория 1</button>
-        <button onclick="showCategory('category2')">Категория 2</button>
-        <button onclick="showCategory('category3')">Категория 3</button>
-    </div>
-    <div class="content-block" id="category-content">
-        Выберите категорию для просмотра информации
-    </div>
 
-    <script>
-        function showCategory(category) {
-            const contentBlock = document.getElementById('category-content');
-            if (category === 'category1') {
-                contentBlock.innerText = 'Информация для категории 1';
-            } else if (category === 'category2') {
-                contentBlock.innerText = 'Информация для категории 2';
-            } else if (category === 'category3') {
-                contentBlock.innerText = 'Информация для категории 3';
-            }
-        }
-    </script>
+<aside class="filter-sidebar">
+    <h2>CLOATHES</h2>
+    <div class="filter-toggle">ЦЕНЫ</div>
+    <div class="filter-area">
+        <form>
+            <input type="number" placeholder="Цена от">
+            <input type="number" placeholder="Цена до">
+        </form>
+    </div>
+    <div class="filter-toggle">БРЕНДЫ</div>
+    <div class="filter-area">
+        <form>
+            <select>
+                <option value="">Выберите бренд</option>
+                <option value="brand1">Brand 1</option>
+                <option value="brand2">Brand 2</option>
+            </select>
+        </form>
+    </div>
+    <div class="filter-toggle">МОДЕЛЬ</div>
+    <div class="filter-area">
+        <form>
+            <select>
+                <option value="">Выберите модель</option>
+                <option value="model1">Model 1</option>
+                <option value="model2">Model 2</option>
+            </select>
+        </form>
+    </div>
+    <div class="filter-toggle">РАЗМЕРЫ</div>
+    <div class="filter-area">
+        <form>
+            <select>
+                <option value="">Выберите размер</option>
+                <option value="size1">Size 1</option>
+                <option value="size2">Size 2</option>
+            </select>
+        </form>
+    </div>
+    <div class="apply-filters">
+        <button type="button">Применить фильтры</button>
+    </div>
+</aside>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var toggles = document.querySelectorAll('.filter-toggle');
+        
+        toggles.forEach(function(toggle) {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                var area = this.nextElementSibling;
+                area.style.display = area.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    });
+</script>
+
 </body>
-</html>
+</html> {% endcomment %}
+<!-- Предположим, что этот код находится в файле catalog/shoes.html -->
+<div class="filter-sidebar">
+    <h2>CLOATHES</h2>
+    <div class="filter-toggle">ЦЕНЫ</div>
+    <div class="filter-area">
+        <form method="GET" action="{% url 'goods:shoes' %}" class="filter-form">
+            <input type="number" name="min_price" placeholder="Цена от" value="{{ request.GET.min_price }}">
+            <input type="number" name="max_price" placeholder="Цена до" value="{{ request.GET.max_price }}">
+            <input type="submit" value="Применить">
+        </form>
+    </div>
+    <div class="filter-toggle">БРЕНДЫ</div>
+    <div class="filter-area">
+            <form method="GET" action="{% url 'goods:shoes' %}" class="filter-form">
+                <select name="brand[]" multiple>
+                    <option value="">Выберите бренд</option>
+                    {% for brand in brands %}
+                    <option value="{{ brand.id }}" {% if brand.id|stringformat:"s" in request.GET.brand %}selected{% endif %}>
+                        {{ brand.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Применить">
+            </form>
+        </div>
+        <div class="filter-toggle">РАЗМЕРЫ</div>
+        <div class="filter-area">
+            <form method="GET" action="{% url 'goods:shoes' %}" class="filter-form">
+                <select name="size[]" multiple>
+                    <option value="">Выберите размер</option>
+                    {% for size in sizes %}
+                    <option value="{{ size.id }}" {% if size.id|stringformat:"s" in request.GET.size %}selected{% endif %}>
+                        {{ size.size }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <input type="submit" value="Применить">
+            </form>
+        </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var toggles = document.querySelectorAll('.filter-toggle');
+                
+                toggles.forEach(function(toggle) {
+                    toggle.addEventListener('click', function() {
+                        this.classList.toggle('active');
+                        var area = this.nextElementSibling;
+                        area.style.display = area.style.display === 'none' ? 'block' : 'none';
+                    });
+                });
+            });
+        </script>
+
+
+{% comment %} <div class="filter-toggle">БРЕНДЫ</div>
+<div class="filter-area">
+    <form method="GET">
+        <select name="brand[]" multiple>
+            <option value="">Выберите бренд</option>
+            {% for brand in brands %}
+            <option value="{{ brand.id }}" {% if brand.id|stringformat:"s" in request.GET.brand %}selected{% endif %}>
+                {{ brand.name }}
+            </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Применить">
+    </form>
+</div>
+<div class="filter-toggle">РАЗМЕРЫ</div>
+<div class="filter-area">
+    <form method="GET">
+        <select name="size[]" multiple>
+            <option value="">Выберите размер</option>
+            {% for size in sizes %}
+            <option value="{{ size.id }}" {% if size.id|stringformat:"s" in request.GET.size %}selected{% endif %}>
+                {{ size.size }}
+            </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Применить">
+    </form>
+</div>
+<!-- ... --> {% endcomment %}
+
+
+def shoes(request):
+    products = Product.objects.filter(type__name="shoes")
+    brands = Brand.objects.all()
+    sizes = Size.objects.all()
+
+    search_query = request.GET.get('search_query')
+    if search_query:
+        products = products.filter(name__icontains=search_query)
+
+    selected_brands = request.GET.getlist('brand')
+    if selected_brands:
+        products = products.filter(brand__id__in=selected_brands)
+
+    selected_sizes = request.GET.getlist('size')
+    if selected_sizes:
+        products = products.filter(sizes__id__in=selected_sizes)
+
+    # ... Остальная логика фильтрации ...
+
+    context = {
+        'brands': brands,
+        'sizes': sizes,
+        'products': products,
+    }
+    return render(request, 'catalog/shoes.html', context)
+    <form method="GET" action="{% url 'shoes' %}">
+        <!-- Поиск по названию -->
+        <input type="text" name="search_query" placeholder="Поиск по названию..." value="{{ request.GET.search_query }}">
+        
+        <!-- Фильтрация по цене -->
+        <input type="number" name="min_price" placeholder="Цена от" value="{{ request.GET.min_price }}">
+        <input type="number" name="max_price" placeholder="Цена до" value="{{ request.GET.max_price }}">
+        
+        <!-- Множественный выбор брендов -->
+        <!-- ... -->
+    
+        <!-- Множественный выбор размеров -->
+        <!-- ... -->
+    
+        <!-- Кнопка отправки формы -->
+        <button type="submit">Фильтровать</button>
+    </form>
+    
