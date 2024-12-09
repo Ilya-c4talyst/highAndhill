@@ -115,34 +115,23 @@
             {% if product.type|default_if_none:""|force_escape == 'shoes' %}
                 <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
             {% else %}
-                <form method="post" id="add-to-cart-form" action="{% url 'goods:clothes_add_to_cart' product_id=product.id %}">
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:accessory_add_to_cart' product_id=product.id %}">
             {% endif %}
                 {% csrf_token %}
                 <input type="hidden" name="size" id="selected-size">
-                {% for size in product.sizes.all %}
-                    <div class="size">
-                        <button type="button" class="size-btn" data-size="{{ size }}">
-                            {% if product.type|default_if_none:""|force_escape == 'shoes' %}
-                                <h3>{{ size }} EU</h3>
-                            {% else %}
-                                <h3>{{ size }}</h3>
-                            {% endif %}
-                        </button>
-                    </div>
-                {% endfor %}
 
         </div>
         <div class="add_to_buy">
             {% if product.type|default_if_none:""|force_escape == 'shoes' %}
                 <form method="post" id="add-to-cart-form" action="{% url 'goods:add_to_cart' product_id=product.id %}">
             {% else %}
-                <form method="post" id="add-to-cart-form" action="{% url 'goods:clothes_add_to_cart' product_id=product.id %}">
+                <form method="post" id="add-to-cart-form" action="{% url 'goods:accessory_add_to_cart' product_id=product.id %}">
             {% endif %}
                 {% csrf_token %}
                 <input type="hidden" name="selected_size" id="selected-size" value="">
                 <button type="submit" class="add-to-cart-btn">
                     <span class="btn-text">Добавить в корзину</span>
-                    <span class="added-text"> &#10003;</span>
+                    <span class="added-text">Добавлено</span>
                 </button>
             </form>
         </div>
@@ -178,40 +167,30 @@
             $('#add-to-cart-form').submit(function(event) {
                 event.preventDefault();
 
-                const selectedSize = $('#selected-size').val();
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),  // Отправляем данные из формы
+                    success: function(response) {
+                        $('.add-to-cart-btn').addClass('added');
+                        $('.add-to-cart-btn').attr('disabled', true);
+                        $('.added-text').css('display', 'inline');
 
-                if (!selectedSize || selectedSize === 'None') {
-                    alert('Пожалуйста, выберите размер перед добавлением в корзину!');
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        url: $(this).attr('action'),
-                        data: $(this).serialize(),  // Отправляем данные из формы
-                        success: function(response) {
-                            $('.add-to-cart-btn').addClass('added');
-                            $('.add-to-cart-btn').attr('disabled', true);
-                            $('.added-text').css('display', 'inline');
-
-                            setTimeout(function() {
-                                // Можно добавить дополнительную логику после успешного добавления в корзину
-                            }, 1000);
-                        },
-                        error: function(xhr, errmsg, err) {
-                            console.log(xhr.status + ": " + xhr.responseText);  // Обработка ошибок
-                        }
-                    });
-                }
+                        setTimeout(function() {
+                            // Можно добавить дополнительную логику после успешного добавления в корзину
+                        }, 1000);
+                    },
+                    error: function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);  // Обработка ошибок
+                    }
+                });
             });
         });
     </script>
     {% endblock main %}
 </div>
 {% block content %}
-    {% if product.type|default_if_none:""|force_escape == 'shoes' %}
-        {% include "includes/others.html" %}
-    {% else %}
-        {% include "includes/others_clothes.html" %}
-    {% endif %}
+    {% include "includes/others_access.html" %}
     {% include "includes/reverse.html" %}
 </div>
 {% endblock content %}

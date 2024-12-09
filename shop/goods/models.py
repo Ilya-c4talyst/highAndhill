@@ -13,6 +13,19 @@ class Type(models.Model):
         return self.name
 
 
+"""Модель модели"""
+class Model(models.Model):
+    name = models.CharField(max_length=150, verbose_name="Модель")
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name='Категория')
+
+    class Meta:
+        verbose_name = 'Модель'
+        verbose_name_plural = 'Модели'
+
+    def __str__(self) -> str:
+        return self.name
+
+
 """Модель баннера"""
 class Banner(models.Model):
     name = models.CharField(max_length=150)
@@ -31,7 +44,7 @@ class Banner(models.Model):
 """Модель бренда"""
 class Brand(models.Model):
     name = models.CharField(max_length = 150, verbose_name = 'Название бренда')
-    slug = models.SlugField(max_length=200, unique=True)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name='Категория')
 
     class Meta:
         verbose_name = 'Бренд'
@@ -69,9 +82,10 @@ class Product(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
+    model = models.ForeignKey(Model, on_delete=models.PROTECT, verbose_name="Модель", blank=True, default=1)
     most_liked = models.BooleanField(default=False)
     on_sale = models.BooleanField(default=False)
-    images = models.ImageField(upload_to='products/')
+    images = models.ImageField(upload_to='products/shoes/')
     show_images = models.ManyToManyField(
         Image,
         through='ImageProductLink'
@@ -145,7 +159,8 @@ class Cloth(models.Model):
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
     type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
-    images = models.ImageField(upload_to='products/', blank=True)
+    images = models.ImageField(upload_to='products/clothes/', blank=True)
+    model = models.ForeignKey(Model, on_delete=models.PROTECT, verbose_name="Модель", blank=True, default=1)
     on_sale = models.BooleanField(default=False)
     show_images = models.ManyToManyField(
         Image,
@@ -211,3 +226,22 @@ class Order(models.Model):
 
     def __str__(self) -> str:
         return self.code
+    
+
+"""Модель для аксессуаров"""
+class Accessory(models.Model):
+    name = models.CharField(max_length = 150, verbose_name = 'Название')
+    price = models.PositiveIntegerField(default=0, verbose_name = 'Цена')
+    description = models.TextField(blank=True, null=True, verbose_name='Описание')
+    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд', blank=True)
+    type = models.ForeignKey(Type, on_delete=models.PROTECT, verbose_name="Тип", blank=True)
+    model = models.ForeignKey(Model, on_delete=models.PROTECT, verbose_name="Модель", blank=True, default=1)
+    on_sale = models.BooleanField(default=False)
+    images = models.ImageField(upload_to='products/accessory/')
+
+    class Meta:
+        verbose_name = 'Аксессуар'
+        verbose_name_plural = 'Аксессуары'
+
+    def __str__(self) -> str:
+        return self.name

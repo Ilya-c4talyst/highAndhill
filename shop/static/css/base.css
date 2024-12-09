@@ -14,6 +14,7 @@ body .container{
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    width: 100vi
 }
 
 .upper {
@@ -21,7 +22,7 @@ body .container{
 }
 
 p {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 300;
 }
 
@@ -36,21 +37,30 @@ p {
     justify-content: space-between;
     align-items: center;
     border-bottom: 3px solid;
+    margin-top: 40px;
 }
 
 .logo {
     margin: 0;
     padding: 0;
+    margin-top: -75px;
+    margin-bottom: 50px;
+    max-height: 140px;
+}
+
+.logo a img {
+    width: 260px;
 }
 
 .nav-1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -30px;
 }
 
 .nav-item{
-    margin: 0 20px;
+    margin: 0 40px;
 }
 
 .nav-item:first-child{
@@ -65,6 +75,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -30px;
 }
 
 .icon {
@@ -76,14 +87,14 @@ p {
 }
 
 .icon:last-child{
-    margin-right: 0;
+    margin-right: 30px;
 }
 
 .icon a span{
     font-weight: 300;
     padding: 0;
-    font-size: 20px;
-    margin-right: 20px;
+    font-size: 25px;
+    margin: 0 5px 0 5px;
     text-transform: uppercase;
 }
 
@@ -92,9 +103,13 @@ p {
     align-items: center;
 }
 
+.icon a img {
+    width: 26px;
+}
+
 
 .banner-ind {
-    margin-top: 30px;
+    margin-top: 50px;
     position: relative;
 }
 
@@ -104,36 +119,24 @@ p {
 }
 
 .banners {
-    margin-top: 30px;
+    margin-top: 50px;
     display: flex;
     justify-content: space-between;
 }
 
 .banner {
-    display: inline-block;
-    max-width: 32%;
+    flex: 0 0 30%;
 }
 
-.banner img{
-    max-width: 100%;
+.banner a img {
     display: block;
-}
-
-.buy-banner {
-    background-color: #D6B5EF;
-    border: black 2px solid;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 20%;
-    text-align: center;
-    position: absolute;
-    bottom: 15%;
-    left: 5%
+    width: 100%;
+    height: auto;
 }
 
 h2, a {
     font-family: "Oswald", sans-serif;
-    font-size: 40px;
+    font-size: 45px;
     font-weight: 400;
     padding: 5px 0;
     text-transform: none;
@@ -150,36 +153,50 @@ h2, a {
     justify-content: space-between;
 }
 
+.content-block {
+    flex: 0 0 40%;
+}
+
 .content-block .info {
     border-top: black 2px solid;
 }
 
 .photo {
     display: inline-block;
+    max-width: 100%;
+    width: 100%;
+    align-self: center;
 }
 
 .photo img {
-    max-width: 100%;
-    height: 300px;
+    width: 100%;
+    height: auto;
+    /* height: 300px; */
     display: block;
 }
 
 .content-block .info p, h3 {
     font-family: "Oswald", sans-serif;
     font-size: 30px;
-    font-weight: 300;
-    margin: 15px 10px;
+    font-weight: 200;
+    margin: 0px;
+    padding: 4px;
 }
 
 h3 {
     font-family: "Oswald", sans-serif;
-    font-size: 35px;
+    font-size: 50px;
     font-weight: 400;
+}
+
+.content-block .info :last-child {
+    margin-bottom: 2%;
 }
 
 .size-btn h3 {
     font-weight: 200;
-    width: 80px;
+    width: 110px;
+    padding: 5px 5px;
 }
 
 .not-found {
@@ -193,26 +210,26 @@ h3 {
 
 h4 {
     font-family: "Oswald", sans-serif;
-    font-size: 35px;
+    font-size: 45px;
     color: white;
     font-weight: 400;
 }
 
 .first-part {
-    max-width: 25%;
+    max-width: 30%;
     align-self: flex-start;
     padding: 3% 0 0 3%;
 }
 
 .second-part {
-    max-width: 30%;
+    max-width: 45%;
     align-self: flex-end;
-    padding: 0 0 3% 0;
+    padding: 0 3% 3% 0;
 }
 
 h5 {
     font-family: "Oswald", sans-serif;
-    font-size: 25px;
+    font-size: 35px;
     font-weight: 400;
     padding: 15px 0;
 }
@@ -222,7 +239,7 @@ h5 {
     flex: 0 0 auto;
 }
 
-footer {
+footer{
     background-color: #000;
     color: white;  
 }
@@ -233,6 +250,8 @@ footer {
     max-width: 100%;
     margin: 0;
     padding: 0;
+    margin-top: 80px;
+    padding-bottom: 80px;
 }
 
 
@@ -252,7 +271,7 @@ footer {
 .foot-content a p, .foot-content p{
     color: white;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 25px;
     padding-top: 10px;
     margin: 0;
 }
@@ -263,15 +282,15 @@ footer {
 
 .foot-content h3 {
     font-weight: 200;
-    font-size: 18px;
+    font-size: 20px;
     margin: 0;
     padding: 0;
     margin-top: 50px;
 }
 
-.foot-content img {
+/* .foot-content img {
     margin-top: 10px;
-}
+} */
 
 
 .all {
@@ -303,11 +322,14 @@ button {
 
 .previous_page a, .next_page a, .current a {
     color: #BDBDBD;
-    font-size: 27px;
+    font-size: 25px;
+    height: 30px;
+    padding: 10px;
 }
 
 .current a{
     color: #000;
+    padding: 20px 20px;
     opacity: 0.8;
 }
 
@@ -317,7 +339,7 @@ button {
 
 .arrow {
     position: relative;
-    bottom: 8px;
+    bottom: 13px;
     padding: 0 20px;
 }
 
@@ -347,13 +369,14 @@ select {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
-    width: 300px;
+    width: 20%;
     text-align: center;
 }
 
 button {
     padding: 5px 10px;
     background-color: #000;
+    font-size: 40px;
     color: white;
     border: none;
     border-radius: 3px;
@@ -370,35 +393,44 @@ button:hover {
 .product-box {
     margin-top: 30px;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-wrap: nowrap;
     font-weight: 400;
-    font-size: 30px;
+    font-size: 40px;
     margin-bottom: 200px;
 }
 
 .info-price-box {
+    order: 1;
     margin-top: 100px;
+    margin-left: 40px;
     display: flex;
     flex-direction: column;
     /* padding-left: 8%;
     padding-right: 10%; */
     text-transform: uppercase;
+    width: 45%;
+    min-width: 400px;
 }
 
 .images-block {
+    order: 2;
     /* margin-right: 10%; */
     margin-top: 100px;
-    width: 800px;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    min-width: 400px;
+}
+
+.img-shoe {
+    width: 100%;
 }
 
 .img-shoe img {
     border: 2px #000 solid;
-    padding: 20px;
-    width: 760px;
+    width: 100%;
 }
 
 .info-price-box .price-box{
@@ -409,25 +441,33 @@ button:hover {
     font-weight: 300;
     color: #1f1e1e;
 }
+.sizes-box {
+    width: 100%;
+}
 
 .sizes-box form{
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    max-width: 500px;
+    /* justify-content: center;
+    align-items: center; */
+    width: 100%;
     background-color: white;
     padding: 0;
     margin: 0;
 }
 
 .size {
-    margin: 10px 10px 6px 0;
+    margin: 6px;
+    /* max-width: 30%; */
+    /* background-color: #0056b3; */
+    /* min-width: 120px; */
+    /* width: 18%; */
+    text-align: center;
 }
 
 .size button {
     background-color: white;
     color: #000;
-    padding: 5px;
 }
 
 .size button:hover {
@@ -453,70 +493,45 @@ button:hover {
     background-color: white;
     text-transform: uppercase;
     font-weight: 200;
-    font-size: 30px;
+    font-size: 25px;
     padding: 0;
     margin: 0;
 }
 
 .content-info {
     margin-top: 30px;
-    font-weight: 300;
+    font-weight: 200;
     text-align: justify;
     max-width: 100%;
-    font-size: 22px;
+    font-size: 30px;
 }
 
 .other-views {
     display: flex;
     justify-content: space-between;
-    max-width: 800px;
     width: 100%;
 }
 
-.other-views img {
+.other-views .view {
+    width: 30%;
+}
+
+.other-views .view img {
     border: 2px #000 solid;
-    padding: 10px;
     margin-right: 20px;
-    max-width: 200px;
     margin-top: 30px;
+    width: 100%;
 }
 
-.other-views img:last-child{
+.other-views :last-child{
     margin-right: 0;
-}
-
-.inspiration {
-    margin-bottom: 50px;
-    max-width: 100%;
-    width: 100%;
-}
-
-.inspiration .blocks{
-    justify-content: space-between;
-    flex-wrap: nowrap;
-}
-
-
-
-.inspiration .blocks a .content-block {
-    border: #000 2px solid;
-    max-width: 800px;
-    width: 100%;
-    height: auto;
-}
-
-
-.inspiration .blocks .content-block .photo img {
-    max-width: 400px;
-    height: auto;
-    width: 100%;
 }
 
 .reverse-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10% 0;
+    margin: 6% 0;
 }
 
 .txt-reverse p{
@@ -531,9 +546,28 @@ button:hover {
     padding-left: 2%;
 }
 
-.size-btn {
+.size button {
+    text-align: center;
+    padding: 8px;
     border: #000 solid 1px;
     border-radius: 15px;
+}
+
+button h3{
+    font-size: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.size-btn {
+    /* border: #000 solid 1px;
+    border-radius: 15px; */
+    padding: 5px;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    
     /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 }
 
@@ -549,43 +583,80 @@ input form {
 
 .add-to-cart-btn {
     margin-top: 55px;
-    padding: 20px 50px;
+    padding: 30px 50px;
     color: black;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    max-width: 450px;
     width: 100%;
 }
 
 .btn-text {
     color: white;
     text-transform: uppercase;
-    font-size: 35px;
+    font-size: 30px;
     text-align: center;
     font-weight: 400;
+    position: relative;
+    top: -5px;
 }
 
 .added-text {
     display: none;
-    color: green;
+    color: white;
     text-transform: uppercase;
     margin-left: 10px;
+    position: relative;
+    top: -5px;
 }
 
 .added {
-    background-color: lightgreen !important; /* Цвет фона для подтверждения добавления */
+    background-color: rgba(137, 136, 136, 0.5)!important;
 }
 
 /* Корзина */
 .cart-box{
-    margin-top: 50px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
+    /* background-color: #0056b3; */
+}
+
+.positions-cart .name-empty {
+    margin-top: 0;
+}
+
+.empty_cart {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty_cart a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-empty {
+    margin-top: 30px;
+}
+
+.empty p {
+    font-size: 60px;
+    font-weight: 200;
+    text-align: center;
+    color: gray;
+}
+
+.empty {
+    margin-top: 20px;
 }
 
 .name h2, .name-empty h2{
-    font-size: 55px;
+    font-size: 60px;
     font-weight: 300;
 }
 
@@ -596,13 +667,20 @@ ul li {
 
 .position li {
     display: flex;
+    align-items: center;
     margin-top: 40px;
 }
 
+
+.position-img {
+    width: 35%;
+}
+
 .position-img img {
-    width: 300px;
-    max-height: 300px;
-    height: 100%;
+    min-width: 120px;
+    width: 100%;
+    height: auto;
+    /* border-right: #000 solid 1px; */
 }
 
 .position-info {
@@ -610,7 +688,7 @@ ul li {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
 .position-info .name_size {
@@ -618,23 +696,27 @@ ul li {
 }
 
 .brand h1 {
-    font-weight: 600;
-    font-size: 34px;
+    font-weight: 400;
+    font-size: 40px;
 }
 
 .name_size h2 {
-    font-weight: 300;
-    font-size: 34px;
+    font-weight: 200;
+    font-size: 40px;
 }
 
 .form-block form, .delete form{
     background-color: white;
 }
 
+.delete {
+    align-self: flex-start;
+}
+
 .delete form button {
     background-color: white;
     padding: 0;
-    margin-left: 50px;
+    margin-left: 10%;
 }
 
 .form-block form button {
@@ -648,19 +730,28 @@ ul li {
 .price-first {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 35px 0;
 }
+
 
 .price-first:first-child{
     margin-top: 50px;
 }
 
 .price-first .text-area p, .price-first .money p{
-    font-size: 35px;
+    font-size: 40px;
+    font-weight: 200;
 }
 
 .price-first .text-area{
     max-width: 70%;
+}
+
+#res-bord {
+    border-top: #000 solid 1px;
+    border-bottom: #000 solid 1px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .code {
@@ -673,7 +764,7 @@ ul li {
 
 .btn-code button{
     font-size: 40px;
-    font-weight: 300;
+    font-weight: 200;
     color: #000;
     background-color: white;
 }
@@ -690,6 +781,7 @@ ul li {
 .faq-blocks {
     position: relative;
     overflow:hidden;
+    margin-top: 50px;
 }
 
 .question {
@@ -697,15 +789,20 @@ ul li {
     justify-content: space-between;
 }
 
-.fa {
+.question-block {
+    border-bottom: #000 1px solid;
+}
+
+/* .question-block img {
     position: absolute;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
-    width:300px;
-    height:300px;
+    max-width: 100%;
+    width: 100%;
+    height: 1px;
     object-fit:cover;
-}
+} */
 /* .question img {
     position: absolute;
     top:50%;
@@ -725,15 +822,16 @@ ul li {
     color: #000;
     padding: 0;
     margin: 30px 0;
-    font-size: 40px;
+    font-size: 45px;
     font-weight: 400px;
     text-align: left;
 }
 
 .answer {
-    font-size: 28px;
+    font-size: 40px;
     font-weight: 300;
     max-width: 90%;
+    padding-bottom: 40px;
 }
 
 .question-block:last-of-type {
@@ -750,7 +848,7 @@ ul li {
     margin: 5px;
     border: 2px solid #3498db;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 12px;
     background-color: #f9f9f9;
     position: relative;
     cursor: pointer;
@@ -776,15 +874,15 @@ ul li {
     pointer-events: none;
 }
 
-.new-models .blocks a, .popular .blocks a {
+/* .new-models .blocks .content-block, .popular .blocks .content-block {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
 
-.new-models .blocks a .content-block, .popular .blocks  a .content-block{
+.new-models .blocks .content-block, .popular .blocks  .content-block{
     border: #000 2px solid;
-}
+} */
 
 .pagination {
     margin-top: 50px;
@@ -799,7 +897,7 @@ ul li {
     /* overflow:hidden; */
     width: 100%;
     height:auto;
-    font-size: 90px;
+    font-size: 70px;
 
     margin-top: 20px;
 }
@@ -812,7 +910,7 @@ ul li {
 }
 
 .content-block {
-    max-width: 300px;
+    max-width: 32%;
 
     width: 100%;
     border: black 2px solid;
@@ -826,23 +924,32 @@ ul li {
     border: none;
     display: inline-block;
     margin: 10px 35px 10px 20px;
+    max-width: 20%;
+    min-width: 100px;
+}
+
+.blocks .content-block {
+    min-width: 120px;
 }
 
 .name-box h1{
     font-weight: 400;
 }
 
-
+.fltrs {
+    max-width: 25%;
+}
 
 .centered-number-input {
     display: flex;
-    align-items: center;
+    align-items: baseline;
+    justify-content: center;
 }
 
 .centered-number-input input {
     border: none;
     background-color: white;
-    font-size: 26px;
+    font-size: 25px;
 }
 
 .decrement, .increment {
@@ -860,61 +967,51 @@ ul li {
     width: 50px;
 }
 
-
 .filter-toggle {
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     background-color: #000;
     color: white;
-    font-weight: 300;
-    padding: 10px;
+    font-weight: 200;
+    padding: 20px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    margin-top: 50px;
     user-select: none;
     position: relative;
-    padding-right: 30px;
-    font-size: 20px;
-
+    padding-right: 40px;
 }
 
 .filter-toggle::after {
     content: "-";
+    font-size: 30px;
     display: block;
     position: absolute;
     right: 10px;
-    font-size: 24px;
     line-height: 1;
 }
 
 .filter-toggle:not(.active)::after {
     content: "+";
+    font-size: 30px;
 }
 
 .filter-area {
     display: none;
     margin-bottom: 20px;
-    max-width: 400px;
+    position: relative;
+    left: -10px;
+    margin-right: 20px;
 }
 
 .filter-area.active {
     display: block;
 }
 
-.filter-area button {
-    display: inline-block;
-    background-color: #000;
-    color: #fff;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-/* .filter-area input[type=number], .filter-area select {
+.filter-area input[type=number], .filter-area select, .filter-area input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -924,7 +1021,7 @@ ul li {
 .filter-area select[multiple] {
     height: auto;
     background-color: #f7f7f7;
-} */
+}
 
 .popular, .list_goods {
     margin: 20px 0;
@@ -944,27 +1041,37 @@ ul li {
 }
 
 
-.filter-price, .filter-srch, .filter-brd, .filter-sizes, .filter-btn{
-    width: 300px;
+.filter-price, .filter-srch, .filter-brd, .filter-sizes, .filter-btn, .filter-models{
+    width: 100%;
     margin-top: 25px;
-    font-size: 20px;
+    font-size: 30px;
     
 }
 
-.filter-brd select, .filter-sizes select {
+.filter-brd select, .filter-sizes select, .filter-models select{
     margin-top: 10px;
+    max-width: 100%;
+    font-weight: 200;
 }
 
 .filter-price input, .filter-srch input {
-    width: 300px;
     margin-top: 10px;
+    text-align: left;
+    font-weight: 200;
+    width: 100%;
+}
+
+label {
+    font-size: 30px;
+    font-weight: 200;
+    width: 100%;
 }
 
 .filter-btn button {
-    width: 300px;
+    width: 100%;
     padding: 20px;
-    font-weight: 300;
-    font-size: 23px;
+    font-weight: 200;
+    font-size: 30px;
 }
 
 input::-webkit-outer-spin-button,
@@ -972,43 +1079,517 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
 
-
-.empty_cart {
-    width: 100%;
-    height: 40vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.empty_cart a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.name-empty {
-    margin-top: 30px;
-}
-
-.empty p {
-    font-size: 55px;
-    font-weight: 200;
-    color: gray;
-}
-
-.empty {
-    margin-top: 20px;
-}
-
 .return h2 {
     margin-top: 30px;
-    font-size: 50px;
+    font-size: 40px;
 }
 
 .answer-return p {
     margin-top: 30px;
     margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.inspiration {
+    margin-bottom: 50px;
+    max-width: 100%;
+    width: 100%;
+}
+
+.inspiration .blocks{
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+
+.inspiration .blocks .content-block {
+    max-width: 30%;
+    flex: 0 0 30%;
+    border: #000 2px solid;
+    width: 100%;
+}
+
+.inspiration .blocks .content-block .photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.mobile-footer {
+    display: none;
+    border-top: #000 2px solid;
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
+}
+
+.mobile-footer .faq-blocks {
+    position: relative;
+    overflow:hidden;
+    margin-top: 5px;
+}
+
+.mobile-footer .faq-blocks .question-block .question {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.mobile-footer .faq-blocks .question-block .question .btn button {
+    background-color: white;
+    color: #000;
+    padding: 0;
+    margin: 30px 10px;
     font-size: 35px;
+    font-weight: 400px;
+    text-align: left;
+}
+
+.mobile-footer .faq-blocks .question-block .answer p {
+    font-size: 30px;
+    font-weight: 300;
+    padding-top: 8px;
+    margin-left: 20px;
+}
+
+/* .mobile-footer .faq-blocks .question-block .answer a {
+    padding: 2px;
+} */
+
+.mobile-footer .faq-blocks .question-block:last-of-type {
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 1599px) {
+    .foot-content p, .foot-content a p, .foot-content h3 {
+        font-size: 20px;
+    }
+    .name h5 {
+        font-size: 25px;
+    }
+    p {
+        font-size: 20px;
+    }
+    .icon a span{
+        font-size: 20px;
+    }
+    .nav-item{
+        margin: 0 20px;
+    }
+    .icon a img {
+        width: 18px;
+    }
+    .content-block .info p, .content-block .info h3{
+        font-size: 28px;
+        margin: 0;
+    }
+    .content-block .info {
+        padding: 5px 5px 0 5px;
+    }
+    h4 {
+        font-size: 35px;
+    }
+    .most a h2, .text-area a h2{
+        font-size: 30px;
+    }
+    .bttns div button, .bttns div a {
+        font-size: 20px;
+    }
+}
+
+
+#menu-toggle {
+    display: none;
+    font-weight: 100;
+    color:white;
+    background-color: white;
+    height: 20px;
+    border-bottom: #000 1px solid;
+    border-top: #000 1px solid;
+    border-radius: 0%;
+    padding: 1px 25px;
+    margin-bottom: 25px;
+}
+
+#sidebar {
+    border-left: #000 solid 1px;
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    background: white;
+    transition: right 0.3s;
+    z-index: 999; /* Добавьте z-index для корректного отображения поверх других элементов */
+}
+
+.sidebar-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 40px 40px;
+    padding: 5px 10px;
+    border-bottom: #000 solid 1px;
+}
+
+.sidebar-menu div a p {
+    font-size: 40px;
+}
+
+
+/* Показывать боковое меню при открытии */
+#sidebar.active {
+    right: 0;
+}
+
+@media screen and (max-width: 1199px) {
+    .foot-content p, .foot-content a p, .foot-content h3 {
+        font-size: 20px;
+    }
+    .name h5 {
+        font-size: 25px;
+    }
+    p {
+        font-size: 16px;
+    }
+    .icon a span{
+        font-size: 16px;
+    }
+    .nav-item{
+        margin: 0 8px;
+    }
+    .icon a img {
+        width: 15px;
+    }
+    .content-block .info :last-child {
+        margin-bottom: 2%;
+    }
+    .logo a img {
+        width: 200px;
+    }
+    .logo {
+        margin: 0;
+        padding: 0;
+        margin-top: -65px;
+        margin-left: -40px;
+        margin-bottom: 10px;
+        max-height: 140px;
+    }
+    .bttns div button, .bttns div a {
+        font-size: 19px;
+    }
+    .name h2 {
+        font-size: 30px;
+    }
+    .price-first .text-area p, .price-first .money p {
+        font-size: 25px;
+    }
+    .btn-code button {
+        font-size: 30px;
+    }
+}
+
+.blocks .content-block:last-child {
+    display: none;
+}
+
+@media screen and (max-width: 1100px){
+    .product-box {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .images-block {
+        order: 0;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .info-price-box {
+        order: 1;
+        width: 100%;
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    .bttns div button, .bttns div a {
+        font-size: 27px;
+    }
+    .info-box {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1080px){
+    .content-block {
+        margin-top: 20px;
+        max-width: 40%;
+        width: 100%;
+    }
+    .blocks {
+        flex-wrap: wrap;
+        margin-top: 0;
+    }
+    .blocks .content-block:last-child {
+        display: block;
+    }
+    h4 {
+        font-size: 30px;
+    }
+    .name-box h1{
+        font-size: 55px;
+    }
+    .price-box h2 {
+        font-size: 42px;
+    }
+    .add-to-cart-btn {
+        margin-top: 35px;
+        padding: 20px 30px;
+        width: 100%;
+    }
+    .content-info {
+        font-size: 20px;
+    }
+    .content-info h5 {
+        font-size: 25px;
+    }
+    .inspiration .blocks .content-block {
+        max-width: 45%;
+        flex: 0 0 48%;
+        border: #000 2px solid;
+        width: 100%;
+    }
+    .size-btn h3 {
+        font-size: 25px;
+        font-weight: 200;
+        width: 15px;
+        padding: 2px 2px;
+    }
+    .size-btn {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .foot-content p, .foot-content a p, .foot-content h3 {
+        font-size: 16px;
+    }
+    .name h5 {
+        font-size: 20px;
+    }
+    p {
+        font-size: 14px;
+    }
+    h4 {
+        font-size: 25px;
+    }
+    .icon{
+        display: none;
+    }
+    .nav-1 {
+        display: none;
+    }
+    #menu-toggle {
+        display: block;
+    }
+    
+    #sidebar {
+        display: block;
+    }
+
+    .list_goods{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .fltrs {
+        max-width: 100%;
+        align-self: flex-end;
+    }
+    .blocks-catalog .content-block{
+        max-width: 40%;
+    }
+    .sidebar-menu div a p {
+        font-size: 20px;
+    }
+    .cart-box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .results {
+        margin-top: 50px;
+    }
+}
+
+.banner-ind-2 {
+    display: none;
+}
+
+@media screen and (max-width: 680px){
+    .blocks-catalog .content-block{
+        border: none;
+        display: inline-block;
+        margin: 5px;
+        max-width: 45%;
+        min-width: 100px;
+    }
+    .content-block {
+        max-width: 45%;
+        width: 100%;
+    }
+    .sidebar-menu {
+        margin: 20px 5px;
+        padding: 5px 5px;
+    }
+    footer {
+        display: none;
+    }
+    .mobile-footer {
+        display: block;
+    }
+    .blocks .content-block {
+        border: #000 1px solid;
+    }
+    .inspiration {
+        margin: 60px 0;
+    }
+    .position-info {
+        padding-left: 10px;
+    }
+    .delete form button {
+        margin-left: 1%;
+    }
+    .banner-ind-2 {
+        display: block;
+    }
+    .banner-ind {
+        display: none;
+    }
+    .banner-ind-2 a .banner-f {
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    #sidebar {
+        right: -300px;
+        width: 300px;
+        height: 100%;
+    }
+    .sidebar-menu div a p {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    .most a h2{
+        font-size: 25px;
+    }
+    .name-box h1 {
+        font-size: 40px;
+    }
+    .price-box h2 {
+        font-size: 35px;
+    }
+    .info-price-box .price-box{
+        margin: 10px 0;
+    }
+    .size-btn h3 {
+        font-size: 20px;
+        font-weight: 200;
+        width: 10px;
+        padding: 2px 2px;
+    }
+    .size-btn {
+        padding: 0;
+    }
+    .empty p {
+        font-size: 40px;
+        margin-top: 20px;
+    }
+    .name-empty {
+        display: none;
+    }
+    .brand h1 {
+        font-size: 28px;
+    }
+    .name_size h2 {
+        font-size: 28px;
+    }
+    .delete {
+        position: relative;
+        right: 30px;
+    }
+    .banner{
+        display: none;
+    }
+    .banner:first-child{
+        display: block;
+    }
+    .banner {
+        width: 100%;
+        flex: 0 0 100%;
+    }
+    .content-block {
+        flex: 0 0 49%;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    #sidebar {
+        right: -200px;
+        width: 200px;
+        height: 100%;
+    }
+    .sidebar-menu div a p {
+        font-size: 15px;
+    }
+    h4 {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .content-block .info p {
+        font-size: 16px;
+    }
+    .content-block .info h3 {
+        font-size: 23px;
+    }
+    .info-price-box {
+        width: 45%;
+        min-width: 300px;
+    }
+    
+    .images-block {
+        width: 40%;
+        min-width: 300px;
+    }
+}
+
+#search-icon {
+    cursor: pointer;
+  }
+  
+  #search-input {
+    margin: 0;
+    width: 50%;
+    height: 5%;
+    padding: 5px;
+    background-color: #fff;
+  }
+
+form .filter input {
+    width: 80%;
+    text-align: left;
+}
+
+form .tn button {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    margin-left: 5px;
 }

@@ -8,28 +8,36 @@
             </div>
         </a>
     </div>
+    <div class="banner-ind-2">
+        <a href ="{{banner_mobile.url}}">
+            <div class="banner-f">
+                <img src="{{banner_mobile.image.url}}" alt="">
+            </div>
+        </a>
+    </div>
     <div class="popular">
         <div class="text-area">
             <div class="most">
                 <a href="{% url "goods:popular" %}"><h2>MOST POPULAR</h2></a>
             </div>
-            <div class="text-area">
+            <div class="most">
                 <a href="{% url "goods:popular" %}"><h2>SEE ALL</h2></a>
             </div>
         </div>
         <div class="blocks">
             {% for good in liked %}
-            <a href="{% url 'goods:shoe' good.id %}">
             <div class="content-block">
+                <a href="{% url 'goods:shoe' good.id %}">
                 <div class="photo">
                     <img src="{{good.images.url}}" alt="">
                 </div>
                 <div class="info">
-                    <h3>{{good.brand}} {{good.name}}</h3>
+                    <h3>{{good.brand}}</h3>
+                    <p>{{good.name}}</p>
                     <p>ОТ {{good.price}}₸</p>
                 </div>
-            </div>
             </a>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -39,21 +47,23 @@
             <div class="most">
                 <a href="{% url "goods:new" %}"><h2>NEW MODELS</h2></a>
             </div>
-            <div class="see-all">
+            <div class="most">
                 <a href="{% url "goods:new" %}"><h2>SEE ALL</h2></a>
             </div>
         </div>
         <div class="blocks">
             {% for good in goods %}
-            <a href="{% url 'goods:shoe' good.id %}">
             <div class="content-block">
+                <a href="{% url 'goods:shoe' good.id %}">
                 <div class="photo">
                     <img src="{{good.images.url}}" alt="">
                 </div>
                 <div class="info">
-                    <h3>{{good.brand}} {{good.name}}</h3>
+                    <h3>{{good.brand}}</h3>
+                    <p>{{good.name}}</p>
                     <p>ОТ {{good.price}}₸</p>
                 </div>
+                </a>
             </div>
             {% endfor %}
         </div>

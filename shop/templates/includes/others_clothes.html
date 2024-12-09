@@ -3,7 +3,7 @@
     <div class="blocks">
         {% for good in look_at %}
         <div class="content-block">
-            <a href="{% url 'goods:shoe' good.id %}">
+            <a href="{% url 'goods:cloth' good.id %}">
             <div class="photo">
                 <img src="{{good.images.url}}" alt="">
             </div>
@@ -12,7 +12,7 @@
                 <h3>{{good.name}}</h3>
                 <p>ОТ {{good.price}}₸</p>
             </div>
-            </a>
+        </a>
         </div>
         {% endfor %}
     </div>

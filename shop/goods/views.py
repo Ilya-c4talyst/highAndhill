@@ -11,14 +11,17 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 
 
-from .models import Product, Brand, Banner, Size, Type, Order, Cloth, ClothSize
+from .models import Product, Brand, Banner, Size, Type, Order, Cloth, ClothSize, Model, Accessory
 
 
 def index(request):
     products = Product.objects.all()
+    request.session.clear()
     ln = len(products)
     products = products[ln-4:]
-    liked = Product.objects.filter(most_liked=True)
+    liked = Product.objects.filter(most_liked=True)[:4]
+    type = get_object_or_404(Type, name="shoes")
+    banner_mobile = type.banners.all()[:4]
     type = get_object_or_404(Type, name="main")
     banners = type.banners.all()
     ln = len(banners)
@@ -26,13 +29,14 @@ def index(request):
     context = {
         'liked': liked,
         "goods": products,
-        'banner': banner
+        'banner': banner,
+        "banner_mobile" : banner_mobile
     }
     return render(request, 'index.html', context=context)
 
 
 def popular(request):
-    products = Product.objects.filter(most_liked=True)
+    products = Product.objects.filter(most_liked=True)[:20]
     context = {
         "goods": products,
     }
@@ -40,7 +44,7 @@ def popular(request):
 
 
 def newest(request):
-    products = Product.objects.all().order_by('-id')
+    products = Product.objects.all().order_by('-id')[:20]
     context = {
         "goods": products,
     }
@@ -65,14 +69,18 @@ def shoes(request):
         info.append(banners[random.randint(0, ln-1)])
     
     products = Product.objects.filter(type__name="shoes")
-    brands = Brand.objects.all()
+    brands = Brand.objects.filter(type__name="shoes")
     sizes = Size.objects.all()
+    models = Model.objects.filter(type__name="shoes")
 
     selected_brands = request.GET.getlist('brands')
     if selected_brands:
         products = products.filter(brand__id__in=selected_brands)
+    
+    selected_models = request.GET.getlist('models')
+    if selected_models:
+        products = products.filter(model__id__in=selected_models)
 
-    # Фильтр по размерам
     selected_sizes = request.GET.getlist('sizes')
     if selected_sizes:
         products = products.filter(sizes__id__in=selected_sizes)
@@ -106,7 +114,8 @@ def shoes(request):
         'goods': goods,
         'banners': info,
         'sizes': sizes,
-        'flag': flag
+        'flag': flag,
+        'models': models,
     }
     return render(request, 'catalog/shoes.html', context=context)
 
@@ -121,14 +130,18 @@ def clothes(request):
         info.append(banners[random.randint(0, ln-1)])
     
     products = Cloth.objects.filter(type__name="clothes")
-    brands = Brand.objects.all()
+    brands = Brand.objects.filter(type__name="clothes")
     sizes = ClothSize.objects.all()
+    models = Model.objects.filter(type__name="clothes")
 
     selected_brands = request.GET.getlist('brands')
     if selected_brands:
         products = products.filter(brand__id__in=selected_brands)
 
-    # Фильтр по размерам
+    selected_models = request.GET.getlist('models')
+    if selected_models:
+        products = products.filter(model__id__in=selected_models)
+
     selected_sizes = request.GET.getlist('sizes')
     if selected_sizes:
         products = products.filter(sizes__id__in=selected_sizes)
@@ -162,7 +175,8 @@ def clothes(request):
         'goods': goods,
         'banners': info,
         'sizes': sizes,
-        'flag': flag
+        'flag': flag,
+        'models': models,
     }
     return render(request, 'catalog/clothes.html', context=context)
 
@@ -177,6 +191,7 @@ def shoescart(request, product_id):
             'type': 'shoes',
             'name': product.name,
             'price': product.price,
+            'brand': str(product.brand),
             'size': size,
             'quantity': cart.get(product_id, {}).get('quantity', 0) + 1
         }
@@ -206,10 +221,12 @@ def clothcart(request, product_id):
         # print(product)
         
         cart = request.session.get('cart', {})
+        new_index = str(max(map(int, cart.keys()), default=-1) + 1) 
         cart[product_id] = {
             'type': 'cloth',
             'name': product.name,
             'price': product.price,
+            'brand': str(product.brand),
             'size': size,
             'quantity': cart.get(product_id, {}).get('quantity', 0) + 1
         }
@@ -221,7 +238,7 @@ def clothcart(request, product_id):
     all_products = Cloth.objects.all()
     ln_products = len(all_products)
     look_at = []
-    for _ in range(4):
+    for _ in range(3):
         look_at.append(all_products[random.randint(0, ln_products-1)])
 
     context = {
@@ -240,13 +257,16 @@ def view_cart(request):
 
     cart_items = []
     total_price = 0 
+
     for product_id, item_data in cart.items():
-        # print(cart.items())
-        # print(item_data['type'])
+
+        print(cart)
         if item_data['type'] == 'shoes':
             product = Product.objects.get(id=product_id)
-        else:
+        elif item_data['type'] == 'cloth':
             product = Cloth.objects.get(id=product_id)
+        else:
+            product = Accessory.objects.get(id=product_id)
 
         item = {
             'product': product,
@@ -260,17 +280,6 @@ def view_cart(request):
         total_price += item['total_price']
 
     return render(request, 'catalog/cart.html', {'code': code, 'cart_items': cart_items, 'total_price': total_price, 'res_price': total_price + 8000})
-
-
-# def update_cart(request, product_id, count):
-#     if request.method == 'POST':
-#         cart = request.session.get('cart', {})
-#         quantity = count
-#         if product_id in cart:
-#             cart[product_id]['quantity'] = count
-#             request.session['cart'] = cart
-
-#     return redirect('goods:view_cart')
 
 def update_cart(request):
     if request.method == 'POST':
@@ -329,3 +338,91 @@ def money(request):
 
 def money_back(request):
     return render(request, 'faq/money_back.html')
+
+
+def accessories(request):
+
+    type = get_object_or_404(Type, name="accessories")
+    banners = type.banners.all()
+    ln = len(banners)
+    info = []
+    for _ in range(3):
+        info.append(banners[random.randint(0, ln-1)])
+    
+    products = Accessory.objects.filter(type__name="accessories")
+    brands = Brand.objects.filter(type__name="accessories")
+    models = Model.objects.filter(type__name="accessories")
+
+    selected_brands = request.GET.getlist('brands')
+    if selected_brands:
+        products = products.filter(brand__id__in=selected_brands)
+
+    selected_models = request.GET.getlist('models')
+    if selected_models:
+        products = products.filter(model__id__in=selected_models)
+
+    search_query = request.GET.get('search_query')
+    if search_query:
+        products = products.filter(name__icontains=search_query)
+
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
+    if min_price:
+        products = products.filter(price__gte=min_price)
+    if max_price:
+        products = products.filter(price__lte=max_price)
+
+    flag = True
+    if len(products) <= 0:
+        flag = False
+
+    paginator = Paginator(products, 10)
+    page = request.GET.get('page')
+    try:
+        goods = paginator.page(page)
+    except PageNotAnInteger:
+        goods = paginator.page(1)
+    except EmptyPage:
+        goods = paginator.page(paginator.num_pages)
+
+    context = {
+        'brands': brands,
+        'goods': goods,
+        'banners': info,
+        'flag': flag,
+        'models': models
+    }
+    return render(request, 'catalog/accesories.html', context=context)
+
+
+
+def accessory(request, product_id):
+    if request.method == 'POST':
+        product = get_object_or_404(Accessory, id=product_id)
+        
+        cart = request.session.get('cart', {})
+        cart[product_id] = {
+            'type': 'accessories',
+            'name': product.name,
+            'price': product.price,
+            'brand': str(product.brand),
+            'size': None,
+            'quantity': cart.get(product_id, {}).get('quantity', 0) + 1
+        }
+        request.session['cart'] = cart
+
+        return redirect('goods:accessory', product_id=product_id)
+    
+    product = get_object_or_404(Accessory, id=product_id)
+    all_products = Accessory.objects.all()
+    ln_products = len(all_products)
+    look_at = []
+    for _ in range(3):
+        look_at.append(all_products[random.randint(0, ln_products-1)])
+
+    context = {
+        'look_at': look_at,
+        'product': product
+    }
+
+    return render(request, 'catalog/accessory.html', context=context)

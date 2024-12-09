@@ -1,6 +1,12 @@
 {% load static %}
 <div class="reverse">
-    <a href="{% url "goods:index" %}">
+    {% if product.type|default_if_none:""|force_escape == 'shoes' %}
+        <a href="{% url "goods:shoes" %}">
+    {% elif product.type|default_if_none:""|force_escape == 'clothes' %}
+        <a href="{% url "goods:clothes" %}">
+    {% else %}
+        <a href="{% url "goods:accessories" %}">
+    {% endif %}
         <div class="reverse-btn">
             <div class="txt-reverse">
                 <p>ПРОДОЛЖИТЬ ПОКУПКИ</p>

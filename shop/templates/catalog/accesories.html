@@ -15,7 +15,7 @@
     <div class='fltrs'>
         <div class="filter-toggle">ФИЛЬТРЫ</div>
         <div class="filter-area">
-            <form method="GET" action="{% url 'goods:shoes' %}">
+            <form method="GET" action="{% url 'goods:accessories' %}">
                 <div class='filter-srch'>
                     <input type="text" name="search_query" placeholder="Поиск по названию..." value="{{ request.GET.search_query }}">
                 </div>
@@ -39,15 +39,6 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class='filter-sizes'>
-                    <label for="sizes">Размеры:</label>
-                    <select name="sizes" id="sizes" multiple>
-                        {% for size in sizes %}
-                        <option value="{{ size.id }}" {% if size.id|stringformat:"s" in request.GET.sizes %}selected{% endif %}>{{ size.size }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            
                 <div class='filter-btn'>
                     <button type="submit">Фильтровать</button>
                 </div>
@@ -59,7 +50,7 @@
     <div class="blocks-catalog">
         {% for good in goods %}
         <div class="content-block">
-            <a href="{% url 'goods:shoe' good.id %}">
+            <a href="{% url 'goods:accessory' good.id %}">
             <div class="photo">
                 <img src="{{good.images.url}}" alt="">
             </div>
@@ -105,6 +96,7 @@
     <div class="not-found">
         <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
         <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
+        <!-- <img src="static/images/header/info.png" alt=""> -->
     </div>
 </a>
 {% endif %}

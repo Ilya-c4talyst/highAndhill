@@ -23,7 +23,7 @@
 <div class="cart-box">
     <div class="positions-cart">
         {% if cart_items %}
-        <div class="name">
+        <div class="name-empty">
             <h2>КОРЗИНА</h2>
         </div>
         {% endif %}
@@ -45,7 +45,7 @@
                                 <h1>{{item.product.brand}}</h1>
                             </div>
                             <div class="name_size">
-                                <h2>{{item.product.name}} ({{item.size}})</h2>
+                                <h2>{{item.product.name}} {% if item.product.type|stringformat:"s" != 'accessories' %}({{item.size}}){% endif %}</h2>
                             </div>
                             <div class="form-block">
 
@@ -124,21 +124,13 @@
                 </div>
             </div>
 
-            <div class="results-line">
-                <img src="{% static 'images/catalog/xLine.png' %}">
-            </div>
-
-            <div class="price-first">
+            <div class="price-first" id="res-bord">
                 <div class="text-area">
                     <p>Всего</p>
                 </div>
                 <div class="money">
                     <p>{{ res_price }}₸</p>
                 </div>
-            </div>
-
-            <div class="results-line">
-                <img src="{% static 'images/catalog/xLine.png' %}">
             </div>
 
             <div class="code">
@@ -155,31 +147,26 @@
                 function showCode() {
                     // Ваш текущий код
                     console.log(1)
-                    var cont = '{{ code }}';
+                    var cont = '<a href="https://t.me/highend_hill">{{ code }}</a>';
                     const codeInfo = document.getElementById('code-content');
-                    codeInfo.innerText = cont;
+                    codeInfo.innerHTML = cont;
 
                     var code = '{{code}}'
                     var cart = {{cart}}
 
                     $.ajax({
                         type: 'POST',
-                        url: '{% url "goods:order" %}',  // Укажите URL вашего view
+                        url: '{% url "goods:order" %}',
                         data: {
-                            csrfmiddlewaretoken: '{{ csrf_token }}',  // Защита CSRF
-                            code: code,  // Передача кода
-                            cart: cart   // Передача корзины
-                            // Дополнительные данные, если нужно
+                            csrfmiddlewaretoken: '{{ csrf_token }}',
+                            code: code,
+                            cart: cart
                         },
                         success: function(data) {
-                            // Обработка успешного выполнения запроса
                             console.log(data);
-                            // Можно добавить дополнительную логику после успешного выполнения
                         },
                         error: function(xhr, errmsg, err) {
-                            // Обработка ошибок
                             console.log(xhr.status + ": " + xhr.responseText);
-                            // Можно добавить обработку ошибок
                         }
                         });
                 }

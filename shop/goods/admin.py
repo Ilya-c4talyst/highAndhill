@@ -4,7 +4,7 @@ from .models import (
     Product, Brand, ProductSizeLink,
     Size, Banner, Type, ClothSize, Cloth,
     ClothSizeLink, ImageClothLink,
-    ImageProductLink, Image, Order
+    ImageProductLink, Image, Order, Model, Accessory
 )
 
 
@@ -138,6 +138,10 @@ class BannerAdmin(admin.ModelAdmin):
 class ImageAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Model)
+class ModelAdmin(admin.ModelAdmin):
+    pass
+
 
 # @admin.register(ImageClothLink)
 # class ImageClothAdmin(admin.ModelAdmin):
@@ -147,7 +151,22 @@ class ImageAdmin(admin.ModelAdmin):
 # @admin.register(ImageProductLink)
 # class ImageShoeAdmin(admin.ModelAdmin):
 #     pass
-
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    list_display = ['code', 'display_cart_details']
+
+    def display_cart_details(self, obj):
+        cart_details = ""
+        for key, value in obj.cart.items():
+            cart_details += f"Name: {value.get('name')}, Index: {key}, Type: {value.get('type')}, Price: {value.get('price')}, Brand: {value.get('brand')}, Size: {value.get('size')}, Quantity: {value.get('quantity')} /// "
+        return cart_details
+
+    display_cart_details.allow_tags = True
+    display_cart_details.short_description = 'Cart Details'
+
+
+
+
+@admin.register(Accessory)
+class AccessoryAdmin(admin.ModelAdmin):
     pass

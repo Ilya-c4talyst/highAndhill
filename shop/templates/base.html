@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
@@ -33,22 +33,110 @@
                             <a href="{% url "goods:clothes" %}"><p>ОДЕЖДА</p></a>
                         </div>
                         <div class="nav-item">
-                            <p>АКСЕССУАРЫ</p>
+                            <a href="{% url "goods:accessories" %}"><p>АКСЕССУАРЫ</p></a>
                         </div>
                         <div class="nav-item">
                             <a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>
                         </div>
                     </nav>
                     <div class="icons">
-                        {% comment %} <div class="icon"><img src="{% static 'images/header/Vector-4.svg' %}" alt=""></div> {% endcomment %}
-                        {% comment %} <div class="icon"><a href='{% url "goods:view_cart" %}'><img src="{% static 'images/header/Vector-3.svg' %}" alt=""></a></div> {% endcomment %}
-                        {% comment %} <div class="icon"><img src="{% static 'images/header/Vector-2.svg' %}" alt=""></div> {% endcomment %}
-                        <div class="icon"><a href='{% url "goods:view_cart" %}'><span>Корзина</span><img src="{% static 'images/header/Vector.svg' %}" alt=""></a></div>
+                        <div class="icon"><a href='{% url "goods:view_cart" %}'><img src="{% static 'images/header/Vector.svg' %}" alt=""></a></div>
+                        <form method="GET" id="search-input" style="display: none;" action="{% url 'goods:shoes' %}">
+                            <div class='filter'>
+                                <input type="text" name="search_query" placeholder="Поиск..." value="{{ request.GET.search_query }}">
+                            </div>
+                            <div class='tn'>
+                                <button type="submit"><img src="{% static 'images/header/lupa.svg' %}" alt=""></button>
+                            </div>
+                        </form>
+                        <div class="icon" id="search-icon" ><img src="{% static 'images/header/lupa.svg' %}" alt=""></div>
+                        
+
                     </div>
+                    <button id="menu-toggle"></button>
+                        <div id="sidebar">
+                            <div class="sidebar-menu">
+                                <div>
+                                    <a href="{% url "goods:sale" %}"><p>SALE</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                            </div>
+                            <div class="sidebar-menu">
+                                <div>
+                                    <a href="{% url "goods:shoes" %}"><p>ОБУВЬ</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                            </div>
+                            <div class="sidebar-menu">
+                                
+                                <div>
+                                    <a href="{% url "goods:clothes" %}"><p>ОДЕЖДА</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                            </div>
+                            <div class="sidebar-menu">
+                                <div>
+                                    <a href="{% url "goods:accessories" %}"><p>АКСЕССУАРЫ</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                                
+                            </div>
+                            <div class="sidebar-menu">
+                                <div>
+                                    <a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                            </div>
+                            <div class="sidebar-menu">
+                                <div>
+                                    <a href="{% url "goods:view_cart" %}"><p>КОРЗИНА</p></a>
+                                </div>
+                                <div class = "sidearrow">
+                                    <img src={% static 'images/header/sidebar.svg' %}>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+                <script>
+                    const searchIcon = document.getElementById('search-icon');
+                    const searchInput = document.getElementById('search-input');
+
+                    searchIcon.addEventListener('click', () => {
+                    searchInput.style.display = 'flex';
+                    searchIcon.style.display = 'none'
+                    });
+                    // JavaScript code
+                    let menuToggle = document.getElementById('menu-toggle');
+                    let sidebar = document.getElementById('sidebar');
+
+                    // Добавляем обработчик события по клику на кнопку меню
+                    menuToggle.addEventListener('click', function() {
+                        sidebar.classList.toggle('active');
+                    });
+
+                    // Закрываем боковое меню при клике за его пределами
+                    document.addEventListener('click', function(event) {
+                        if (!sidebar.contains(event.target) && event.target !== menuToggle) {
+                            sidebar.classList.remove('active');
+                        }
+                    });
+
+
+    
+                </script>
             </header>
             {% block main %}
-            <div class="banner-ind">
+            {% comment %} <div class="banner-ind">
                 <div class="banner-f">
                     <img src="{{banner.image}}" alt="">
                 </div>
@@ -72,9 +160,9 @@
                             <img src="{{good.image}}" alt="">
                         </div>
                         <div class="info">
-                            <h3>{{good.name}}</h3>
-                            <p>{{good.description}}</p>
-                            <p>ОТ {{good.price}}₸</p>
+                            <h3>{{good.brand}}</h3>gvy
+                            <p>{{good.name}}</p>
+                            <p>ОТ {{good.price}} ₸</p>
                         </div>
                     </div>
                     {% endfor %}
@@ -96,9 +184,9 @@
                             <img src="{{good.image}}" alt="">
                         </div>
                         <div class="info">
-                            <h3>{{good.name}}</h3>
-                            <p>{{good.description}}</p>
-                            <p>ОТ {{good.price}}₸</p>
+                            <h3>{{good.brand}}</h3>
+                            <p>{{good.name}}</p>
+                            <p>ОТ {{good.price}} ₸</p>
                         </div>
                     </div>
                     {% endfor %}
@@ -108,7 +196,7 @@
                 <div class="first-part"><h4>В КАТАЛОГЕ НЕТ ИНТЕРЕСУЮЩЕЙ МОДЕЛИ?</h4></div>
                 <div class="second-part"><h4>ВЫ ВСЕГДА МОЖЕТЕ ОФОРМИТЬ ИНДВИДУАЛЬНЫЙ ЗАКАЗ, НАПИСАВ НАШЕМУ МЕНЕДЖЕРУ</h4></div>
                 <!-- <img src="static/images/header/info.png" alt=""> -->
-            </div>
+            </div> {% endcomment %}
             {% endblock main %}
         </div>
         {% block content %}
@@ -148,11 +236,77 @@
                         <p>8 (929) 665 44 19</p>
                         <p>highend.hill@mail.ru</p>
                         <p>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</p>
-                        <img src={% static 'images/faq/Icon.png' %}>
-                        <p>Значок 2</p>
+                        <a href="https://t.me/highend_hill">
+                            <img src={% static 'images/faq/Icon.svg' %}>
+                        </a>
+                        <a href="https://t.me/highend_hill">
+                            <img src={% static 'images/faq/insta.svg' %}>
+                        </a>
                     </div>
                 </div>
         </footer>
+        <div class="mobile-footer">
+            <div class="faq-blocks">
+                <div class="question-block">
+                    <div class="question">
+                        <div class="btn">
+                            <button onclick="show('1')">РАЗДЕЛЫ</button>
+                        </div>
+                        <div class="plus">
+                            <img src="{% static 'images/faq/plus.svg' %}" id='img1'>
+                        </div>
+                    </div>
+                    <div class="answer" id='faq-1'>
+                    </div>
+                </div>
+            
+                <div class="question-block">
+                    <div class="question">
+                        <div class="btn">
+                            <button onclick="show('2')">ИНФОРМАЦИЯ</button>
+                        </div>
+                        <div class="plus">
+                            <img src="{% static 'images/faq/plus.svg' %}" id='img2'>
+                        </div>
+                    </div>
+                    <div class="answer" id='faq-2'>
+                    </div>
+                </div>
+        </div>
+        <script>
+            function show(question) {
+                const firstTxt = '<a href="{% url "goods:sale" %}"><p>SALE</p></a><a href="{% url "goods:shoes" %}"><p>ОБУВЬ</p></a><a href="{% url "goods:clothes" %}"><p>ОДЕЖДА</p></a><a href="{% url "goods:accessories" %}"><p>АКСЕССУАРЫ</p></a><a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>'
+                const secondTxt = '<a href="{% url "goods:delivery" %}"><p>ДОСТАВКА</p></a><a href="{% url "goods:payment" %}"><p>ОПЛАТА</p></a><a href="{% url "goods:return" %}"><p>ВОЗВРАТ</p></a><a href="{% url "goods:faq" %}"><p>ИНФОРМАЦИЯ</p></a>'
+
+                const plus = "{% static 'images/faq/plus.svg' %}"
+                const minus = "{% static 'images/faq/minus.svg' %}"
+        
+                const firstInfo = document.getElementById('faq-1');
+                const firstImg = document.getElementById('img1');
+        
+                const secondInfo = document.getElementById('faq-2');
+                const secondImg = document.getElementById('img2');
+        
+                if (question === '1') {
+                    if (firstInfo.innerHTML === firstTxt) {
+                        firstInfo.innerHTML = ''
+                        firstImg.src = plus  
+        
+                    } else {
+                        firstInfo.innerHTML = firstTxt
+                        firstImg.src = minus
+                    }
+                } else if (question === '2') {
+                    if (secondInfo.innerHTML === secondTxt) {
+                        secondInfo.innerHTML = ''
+                        secondImg.src = plus  
+                    } else {
+                        secondInfo.innerHTML = secondTxt
+                        secondImg.src = minus
+                    }
+                }
+            }
+        </script>
     </div>
 </body>
 </html>
